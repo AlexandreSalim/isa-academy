@@ -1,0 +1,7 @@
+{
+  "name": "isa-academy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
