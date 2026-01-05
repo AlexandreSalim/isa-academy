@@ -1,0 +1,206 @@
+:host {
+  display: block;
+  font-family: "Montserrat", sans-serif !important;
+  color: #0b1220; // texto escuro
+}
+
+/* Conteúdo */
+.ex-dialog-content {
+  padding: 24px 28px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+.dialog-title {
+  margin: 0 0 18px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #00061C;
+}
+
+/* Linhas do formulário */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  label {
+    font-size: 14px;
+    color: #00061C;
+    margin-left: 4px;
+  }
+}
+
+/* Inputs comuns */
+.input,
+.input-select,
+textarea.input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.input:focus,
+.input-select:focus,
+textarea.input:focus {
+  border-color: #0b1220;
+  box-shadow: 0 2px 6px rgba(11,18,32,0.06);
+}
+
+/* Textarea */
+textarea.textarea {
+  min-height: 56px;
+  resize: vertical;
+}
+
+/* Dois elementos na mesma linha */
+.row-two {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  .col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+  label {
+    font-size: 14px;
+    color: #00061C;
+    margin-left: 4px;
+    margin-bottom: 12px;
+  }  
+}
+}
+
+/* Input com unidade (Kg) */
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .input {
+    padding-right: 54px; /* espaço para a unidade */
+  }
+
+  .unit {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    font-size: 13px;
+    color: #2b3340;
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+}
+
+/* Row com radio + campo pequeno */
+.radio-row {
+  flex-direction: column;
+  margin-left: 35px;
+
+  .radio-col {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #2b3340;
+
+    input[type="radio"] {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .small-input {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    position: relative;
+
+    .input {
+      width: 144px;
+      padding: 10px 10px;
+      border-radius: 10px;
+      text-align: start;
+    }
+
+    .x {
+      font-size: 14px;
+      color: #2b3340;
+      position: absolute;
+      right: 12px;
+    }
+
+    .unit-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 51.64px;
+      height: 100%;
+      border-radius: 8px;
+      background: #07112a; /* botão escuro */
+      color: #fff;
+      font-weight: 600;
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+/* Link adicionar mais */
+.add-more {
+  margin: 12px 0 6px;
+  text-align: center;
+  color: #6b6f80;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Ações (botões) */
+.ex-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 28px 22px;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.btn-cancel {
+  background: #e6e7eb;
+  color: #0b1220;
+  border-radius: 10px;
+  padding: 10px 18px;
+  width: 37.5%;
+  font-weight: 600;
+}
+
+.btn-add {
+  background: #07112a;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 10px 22px;
+  width: 57.5%;
+  font-weight: 700;
+}
+
+/* Responsividade */
+@media (max-width: 426px) {
+
+}

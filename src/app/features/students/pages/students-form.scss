@@ -1,0 +1,174 @@
+.inputMarginTop {
+  margin-top: 20px;
+}
+
+.divButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 44px;
+
+  .button {
+    background: #020b2a;
+    width: 308px;
+    height: 57px;
+
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+.content {
+  background-color: #d9d9d9;
+  padding: 24px 24px 0px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 16px;
+    color: black;
+    margin-left: 10px;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .form {
+    background-color: white;
+    padding: 16px;
+    color: black;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    border-radius: 15px;
+    margin-bottom: 24px;
+    
+
+    .double {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+
+      input {
+        width: 148px;
+      }
+      .inputRadio {
+        width: 148px;
+        height: 40px;
+        border: 1px solid black;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        p {
+          margin: 0;
+        }
+
+        input[type="radio"] {
+          width: 20px;
+          height: 20px;
+          accent-color: #60a5fa;
+        }
+      }
+    }
+
+    .doubleRadios {
+      display: block;
+    }
+
+    .input {
+      display: flex;
+      flex-direction: column;
+      font-family: "Montserrat", sans-serif;
+
+      label {
+        margin-bottom: 12px;
+        margin-left: 8px;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      input {
+        background-color: transparent;
+        border: solid 1px black;
+        border-radius: 8px;
+        height: 40px;
+        padding: 6px 16px;
+      }
+    }
+  }
+}
+
+.error {
+  color: #c62828;
+  font-size: 25px;
+  display: block;
+  margin-left: 5px;
+}
+
+/* realça inputs inválidos quando já tocados */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid #c62828;
+  box-shadow: 0 0 0 2px rgba(198, 40, 40, 0.06);
+}
+
+////////css do date
+.dob-wrapper {
+  font-family: "Montserrat", sans-serif;
+  color: #111827;
+  max-width: 640px;
+}
+.dob-label {
+  font-family: "Montserrat", sans-serif;
+  color: black;
+  font-size: 14px;
+  margin-bottom: 12px;
+  margin-left: 8px;
+  display: inline-block;
+}
+.dob-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.dob-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  flex: 1;
+  font-size: 14px;
+  padding: 6px 16px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background: white;
+  outline: none;
+  line-height: 1.2;
+  font-family: "Montserrat", sans-serif;
+  width: 94px;
+  height: 40px;
+}
+.dob-select:focus {
+  border-color: #60a5fa;
+}
+.hint {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+
+@media (min-width: 450px) {
+    .form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    }
+}

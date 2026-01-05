@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 108px;
+  background: linear-gradient(165deg, #020B2A 21%, #122959 70%, #4E75A4 100%);
+
+  border-radius: 0 0 20px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 1;
+
+  ion-icon {
+    margin: 0 16px 0 24px;
+    font-size: 30px;
+  }
+}

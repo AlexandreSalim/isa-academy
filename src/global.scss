@@ -35,3 +35,47 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+.alert-wrapper.sc-ion-alert-md {
+  background-color: white;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.alert-message.sc-ion-alert-md,
+.alert-input-group.sc-ion-alert-md {
+  color: black;
+}
+
+.alert-title.sc-ion-alert-md {
+  color: black;
+}
+
+.alert-button-group.sc-ion-alert-md {
+  justify-content: space-between;
+}
+
+.alert-button.sc-ion-alert-md {
+}
+
+.btn-cancel-mensalidades {
+  background: #e53935 !important;
+  color: white !important;
+  width: 40% !important;
+  border-radius: 10px !important;
+
+  .alert-button-inner.sc-ion-alert-md {
+    justify-content: center !important;
+  }
+}
+
+.btn-confirm-mensalidades {
+  background: #d9d9d9 !important;
+  color: black !important;
+  border: none !important;
+  width: 50% !important;
+  border-radius: 10px !important;
+
+  .alert-button-inner.sc-ion-alert-md {
+    justify-content: center !important;
+  }
+}

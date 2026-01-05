@@ -1,0 +1,108 @@
+<ion-header
+  [translucent]="true"
+  style="background-color: #d9d9d900; box-shadow: none"
+>
+  <div class="header">
+    <div class="header_div1">
+      <ion-icon name="chevron-back-outline" (click)="back()"></ion-icon>
+      <p>Alunos</p>
+    </div>
+
+    <div class="header_div2">
+      <div class="search-wrapper">
+        <ion-icon name="search-outline" class="pesquisa"></ion-icon>
+        <input
+          type="text"
+          placeholder="Buscar"
+          [(ngModel)]="searchTerm"
+          aria-label="Buscar alunos"
+        />
+      </div>
+
+      <div class="filter-wrapper" (click)="toggleFilter($event)">
+        <ion-icon name="filter-circle-outline" class="filter-icon"></ion-icon>
+
+        <!-- dropdown de filtro -->
+        <div
+          class="filter-menu"
+          *ngIf="showFilter"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="filter-title">Filtrar por:</div>
+          <button class="filter-item" (click)="selectFilter('A-Z')">
+            <span>A-Z</span>
+            <ion-icon
+              *ngIf="selectedFilter === 'A-Z'"
+              name="checkmark-outline"
+            ></ion-icon>
+          </button>
+          <button class="filter-item" (click)="selectFilter('Z-A')">
+            <span> Z-A</span>
+            <ion-icon
+              *ngIf="selectedFilter === 'Z-A'"
+              name="checkmark-outline"
+            ></ion-icon>
+          </button>
+          <button class="filter-item" (click)="selectFilter('Masculino')">
+            <span>Masculino</span>
+            <ion-icon
+              *ngIf="selectedFilter === 'Masculino'"
+              name="checkmark-outline"
+            ></ion-icon>
+          </button>
+          <button class="filter-item" (click)="selectFilter('Feminino')">
+            <span>Feminino</span>
+             <ion-icon
+              *ngIf="selectedFilter === 'Feminino'"
+              name="checkmark-outline"
+            ></ion-icon>
+          </button>
+          <button class="filter-item" (click)="selectFilter('Em dia')">
+           <span> Em dia</span>
+            <ion-icon
+              *ngIf="selectedFilter === 'Em dia'"
+              name="checkmark-outline"
+            ></ion-icon>
+          </button>
+          <button class="filter-item" (click)="selectFilter('Em atraso')">
+            <span> Em atraso</span>
+             <ion-icon
+              *ngIf="selectedFilter === 'Em atraso'"
+              name="checkmark-outline"
+            ></ion-icon>
+          </button>
+
+          <div class="divider"></div>
+          <div class="filter-actions" (click)="clearFilter()">
+            <button class="link">Limpar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="--background: #d9d9d9">
+  <main>
+    <section class="block">
+      <ng-container *ngIf="filteredStudents.length; else empty">
+        <div *ngFor="let aluno of filteredStudents" class="button" (click)="informationStudients(aluno.id)">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <div class="student-info">
+            <p class="name">{{ aluno.name }}  {{ aluno.surname }}</p>
+            <small class="meta"
+              >{{ aluno.gender === 'Masculino' ? 'Masculino' : 'Feminino' }} • {{
+              aluno.status }}</small
+            >
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #empty>
+        <p style="padding: 16px; color: #666">Nenhum aluno encontrado.</p>
+      </ng-template>
+    </section>
+  </main>
+
+  <footer style="background-color: rgba(0, 0, 0, 0); height: 48px"></footer>
+</ion-content>

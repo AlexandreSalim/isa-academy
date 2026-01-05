@@ -1,0 +1,16 @@
+<mat-dialog-content class="ex-dialog-content">
+  <h2 class="dialog-title">Adicionar exercício</h2>
+
+  <div class="form-row">
+    <label>Grupo</label> 
+    <input class="input" [(ngModel)]="data.name"/>
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="ex-dialog-actions">
+  <button mat-button class="btn-cancel" (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button class="btn-add" (click)="onConfirm()">
+    Adicionar
+  </button>
+</mat-dialog-actions>

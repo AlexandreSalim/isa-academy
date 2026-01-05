@@ -1,0 +1,172 @@
+<main>
+  <section class="modal-content">
+    <h1 class="title" *ngIf="isEntrada">Adicionar entrada</h1>
+    <h1 class="title" *ngIf="isSaida">Adicionar saída</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-list">
+      <!-- Título -->
+      <section class="sectionTitle">
+        <label>Título</label>
+        <input
+          formControlName="title"
+          placeholder="Ex.: Venda de suplemento"
+          [class.invalid]="
+            form.get('title')?.invalid && form.get('title')?.touched
+          "
+        />
+        <small
+          *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+          class="error"
+        >
+          Título é obrigatório
+        </small>
+      </section>
+
+      <!-- Valor -->
+      <section class="sectionTitle">
+        <label>Valor (R$)</label>
+        <input
+          formControlName="value"
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="0,00"
+          [class.invalid]="
+            form.get('value')?.invalid && form.get('value')?.touched
+          "
+        />
+        <small
+          *ngIf="form.get('value')?.invalid && form.get('value')?.touched"
+          class="error"
+        >
+          Valor deve ser maior que zero
+        </small>
+      </section>
+
+      <!-- Campos específicos para entrada (venda) -->
+      <div *ngIf="isEntrada" style="display: none;">
+        <section class="sectionDualInputs">
+          <div class="sectionTitle">
+            <label>Quantidade</label>
+            <input formControlName="quantity" type="number" min="1" value="1" />
+          </div>
+          <div class="sectionTitle">
+            <label>Preço unitário</label>
+            <input
+              formControlName="unit_price"
+              type="number"
+              min="0.01"
+              step="0.01"
+            />
+          </div>
+        </section>
+      </div>
+
+      <!-- Campos específicos para saída (despesa) -->
+      <div *ngIf="isSaida" style="display: none;">
+        <section class="sectionTitle">
+          <label>Categoria</label>
+          <select formControlName="category">
+            <option
+              *ngFor="let categoria of categorias"
+              [value]="categoria.valor"
+            >
+              {{ categoria.label }}
+            </option>
+          </select>
+        </section>
+
+        <section class="sectionTitle">
+          <label>Observações</label>
+          <textarea
+            formControlName="notes"
+            placeholder="Opcional"
+            rows="2"
+          ></textarea>
+        </section>
+      </div>
+
+      <!-- Data -->
+      <section class="sectionTitle">
+        <label>Data *</label>
+        <input formControlName="date" type="date" />
+      </section>
+
+      <!-- Método de pagamento -->
+      <section class="sectionTitle" style="display: none;">
+        <label>Método de pagamento</label>
+        <select formControlName="payment_method">
+          <option
+            *ngFor="let metodo of metodosPagamento"
+            [value]="metodo.valor"
+          >
+            {{ metodo.label }}
+          </option>
+        </select>
+      </section>
+
+      <!-- Repetição -->
+      <section class="dualRadio">
+        <div class="radio">
+          <input
+            id="01"
+            type="radio"
+            formControlName="repeatMode"
+            value="none"
+          />
+          <label for="01">Não repetir</label>
+        </div>
+
+        <div class="radioSelect">
+          <div class="radio">
+            <input
+              id="02"
+              type="radio"
+              formControlName="repeatMode"
+              value="repeat"
+            />
+            <label for="02">Repetir mensalmente</label>
+          </div>
+
+          <select
+            formControlName="repeatInterval"
+            [disabled]="form.get('repeatMode')?.value === 'none'"
+          >
+            <option
+              *ngFor="let mes of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+              [value]="mes"
+            >
+              {{ mes }} {{ mes === 1 ? "mês" : "meses" }}
+            </option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Dia da recorrência (apenas para despesas recorrentes) -->
+      <section *ngIf="isSaida && showRecurrenceDay" class="sectionTitle" style="display: none;">
+        <label>Dia da recorrência (1-31)</label>
+        <input
+          formControlName="recurrence_day"
+          type="number"
+          min="1"
+          max="31"
+        />
+      </section>
+
+      <div class="actions">
+        <button class="cancel" type="button" (click)="onCancel()">
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="adicionar"
+          [disabled]="form.invalid"
+          [class.disabled]="form.invalid"
+        >
+          Adicionar
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

@@ -1,0 +1,74 @@
+<app-header [title]="'Resultado'"></app-header>
+
+<ion-content [fullscreen]="true" class="result-shell">
+  <main class="result-main">
+
+    <!-- cartão IMC grande -->
+    <section class="card imc-card">
+      <div class="imc-top">
+        <div class="imc-title">Índice de Massa Corporal (IMC)</div>
+        <div class="imc-value">
+          <span class="imc-number">{{ imc | number:'1.1-1' }}</span>
+          <span class="imc-badge" [ngClass]="imcBadgeClass()">{{ imcLabel }}</span>
+        </div>
+      </div>
+
+      <!-- barra colorida e ponteiro -->
+      <div class="imc-bar-wrapper">
+        <div class="imc-bar"></div>
+          <ion-icon class="imc-pointer" name="caret-down-outline" [style.left.%]="imcPositionPercent()"></ion-icon>
+          <div class="triangle"></div>
+        </div>
+    </section>
+
+    <!-- detalhes (listagem de cards) -->
+    <section class="cards-list">
+      <div class="detail-card">
+        <div class="detail-left">
+          <img src="/assets/icon/abdomi.png">
+          <div class="detail-label">Peso ideal</div>
+        </div>
+        <div class="detail-value">{{ weightRange }}</div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-left">
+          <img src="/assets/icon/balança.png">
+          <div class="detail-label">Dens. corporal</div>
+        </div>
+        <div class="detail-value">{{ density }}</div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-left">
+          <img src="/assets/icon/percentualDeGordura.png">
+          <div class="detail-label">Percentual de gordura</div>
+        </div>
+        <div class="detail-value">
+          {{ fatPercent }} <span class="fat-label">{{ fatLabel }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- dois cards em linha -->
+    <section class="two-cards">
+      <div class="mini-card">
+        <div class="mini-icon"><img src="/assets/icon/braço.png"></div>
+        <div class="mini-title">Massa magra</div>
+        <div class="mini-value">{{ leanMassKg }}</div>
+      </div>
+
+      <div class="mini-card">
+        <div class="mini-icon"><img src="/assets/icon/corpo.png"></div>
+        <div class="mini-title">Massa gorda</div>
+        <div class="mini-value">{{ leanMassPct }}</div>
+      </div>
+    </section>
+
+    <!-- botões -->
+    <section class="actions">
+      <button fill="outline" class="btn-cancel"  (click)="goBackToEdit()" >Editar</button>
+      <button class="btn-save" (click)="save()">Salvar resultado</button>
+    </section>
+  </main>
+</ion-content>

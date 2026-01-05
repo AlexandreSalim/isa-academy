@@ -1,0 +1,202 @@
+<ion-content [fullscreen]="true" class="page-content">
+  <div class="hero-top">
+    <div
+      style="
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: start;
+        padding: 24px 24px 0 24px;
+      "
+    >
+      <ion-icon
+        name="chevron-back-outline"
+        class="back-btn"
+        (click)="back()"
+      ></ion-icon>
+      <h1>Mensalidades</h1>
+    </div>
+    <ion-button fill="outline" class="month-btn" (click)="openMonthPicker()"
+      >{{ month }} <ion-icon name="chevron-down-outline"></ion-icon
+    ></ion-button>
+  </div>
+
+  <div class="header-hero">
+    <div class="hero-mid">
+      <div class="situation">
+        <div style="display: flex; align-items: center; gap: 4px">
+          <h2 class="amount">Alunos ativos: {{ totals.totalAlunos }} alunos</h2>
+        </div>
+        <div class="forecast">
+          <div class="progress-bar">
+            <div
+              class="progress"
+              [style.width.%]="totals.porcentagemPagos.replace('%', '')"
+            ></div>
+          </div>
+          <p>{{ totals.porcentagemPagos }} dos pagamentos</p>
+        </div>
+        <!-- <div class="total-recebido" >
+          <p>Total recebido: {{ totals.totalRecebido }}</p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="box">
+      <section class="header_div2">
+        <div class="search-wrapper">
+          <ion-icon name="search-outline" class="pesquisa"></ion-icon>
+          <input
+            type="text"
+            placeholder="Buscar"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchChange()"
+            aria-label="Buscar alunos"
+          />
+        </div>
+
+        <!-- Filtro -->
+        <div class="filter-wrapper">
+          <button class="filter-btn" (click)="toggleFilter($event)">
+            <ion-icon name="filter-outline"></ion-icon>
+          </button>
+
+          <div class="filter-dropdown" *ngIf="showFilter">
+            <button
+              (click)="selectFilter('A-Z')"
+              [class.active]="selectedFilter === 'A-Z'"
+            >
+              A-Z
+            </button>
+            <button
+              (click)="selectFilter('Z-A')"
+              [class.active]="selectedFilter === 'Z-A'"
+            >
+              Z-A
+            </button>
+            <button
+              (click)="selectFilter('Pago')"
+              [class.active]="selectedFilter === 'Pago'"
+            >
+              Pago
+            </button>
+            <button
+              (click)="selectFilter('Não pago')"
+              [class.active]="selectedFilter === 'Não pago'"
+            >
+              Não pago
+            </button>
+            <button (click)="clearFilter()" class="clear-btn">
+              Limpar filtros
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Carregando dados...</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="errorMessage && !loading" class="error">
+        <ion-icon name="warning-outline"></ion-icon>
+        <p>{{ errorMessage }}</p>
+        <ion-button fill="outline" (click)="carregarDadosMensalidades()">
+          Tentar novamente
+        </ion-button>
+      </div>
+
+      <!-- Data -->
+      <section *ngIf="!loading && !errorMessage">
+        <div class="header_alunos">
+          <p>ALUNO</p>
+          <p>VENCE</p>
+          <p>STATUS</p>
+        </div>
+
+        <mat-list role="list">
+          <mat-list-item
+            role="listitem"
+            *ngFor="let info of pagedInfos; let i = index"
+          >
+            <div class="list">
+              <p>{{ info.aluno }}</p>
+              <p>{{ info.vencimento }}</p>
+              <p>
+                <span
+                  class="status"
+                  [class.pago]="info.status === 'pago'"
+                  [class.nao-pago]="info.status !== 'pago'"
+                  (click)="togglePagamento(info)"
+                  [style.cursor]="'pointer'"
+                >
+                  {{ info.status === 'pago' ? 'Pago' : 'Pendente' }}
+                  <!-- <span
+                    *ngIf="info.status === 'pago' && info.data_pagamento"
+                    class="data-pagamento"
+                  >
+                    ({{ info.data_pagamento }})
+                  </span> -->
+                  <!-- Adicione indicador visual para outros status -->
+                  <!-- <span
+                    *ngIf="info.status === 'nao_pago'"
+                    class="status-indicator"
+                    style="color: #ff9800"
+                  >
+                    (Não pago)
+                  </span> -->
+                </span>
+              </p>
+            </div>
+          </mat-list-item>
+        </mat-list>
+
+        <!-- Mensagem quando não há dados -->
+        <div *ngIf="listaAlunos.length === 0" class="no-data">
+          <ion-icon name="receipt-outline"></ion-icon>
+          <p style="color: black">
+            Nenhum pagamento registrado para {{ month }}
+          </p>
+        </div>
+
+        <!-- Paginação -->
+        <div class="pagination" *ngIf="filteredInfos.length > 0">
+          <button
+            class="page-btn arrow"
+            (click)="prevPage()"
+            [disabled]="currentPage === 1"
+          >
+            &lt;
+          </button>
+
+          <ng-container *ngFor="let p of pageButtons">
+            <ng-container *ngIf="p !== '...'; else dots">
+              <button
+                class="page-btn"
+                [class.active]="p === currentPage"
+                (click)="goToPage(p)"
+              >
+                {{ p }}
+              </button>
+            </ng-container>
+            <ng-template #dots>
+              <span class="dots">…</span>
+            </ng-template>
+          </ng-container>
+
+          <button
+            class="page-btn arrow"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            &gt;
+          </button>
+        </div>
+      </section>
+    </section>
+  </main>
+</ion-content>

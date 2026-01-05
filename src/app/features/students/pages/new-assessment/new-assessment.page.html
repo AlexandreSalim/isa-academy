@@ -1,0 +1,313 @@
+<app-header [title]="'Nova Avaliação'"></app-header>
+
+<ion-content #ionContent [fullscreen]="true" class="page-content">
+  <div class="page-padding">
+    <div class="section-title-row">
+      <h3 class="section-title">Avaliação do aluno</h3>
+      <a class="date-link">
+        <span>Data: {{ evaluationDate | date:'dd/MM/yyyy' }}</span>
+        <!-- <ion-icon name="create-outline"></ion-icon> -->
+      </a>
+    </div>
+
+    <div class="card" [formGroup]="form" #formEl>
+      <!-- Peso / Altura -->
+      <div class="row two">
+        <div class="field">
+          <div class="erro">
+            <label>Peso:</label>
+            <small class="error" *ngIf="hasError('peso')">*</small>
+          </div>
+          <div class="input-with-unit">
+            <input type="text" formControlName="peso" placeholder="" />
+            <span class="unit">kg</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="erro">
+            <label>Altura:</label>
+            <small class="error" *ngIf="hasError('altura')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="altura" placeholder="" />
+            <span class="unit">cm</span>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Perímetros -->
+      <h4 class="group-title">Perímetros</h4>
+
+      <div class="row two">
+        <div class="field">
+          <div class="erro">
+            <label>Torax</label>
+            <small class="error" *ngIf="hasError('torax')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="torax" />
+            <span class="unit">cm</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="erro">
+            <label>Cintura</label>
+            <small class="error" *ngIf="hasError('cintura')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="cintura" />
+            <span class="unit">cm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row two">
+        <div class="field">
+          <div class="erro">
+            <label>Abdome</label>
+            <small class="error" *ngIf="hasError('abdome')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="abdome" />
+            <span class="unit">cm</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="erro">
+            <label>Quadril</label>
+            <small class="error" *ngIf="hasError('quadril')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="quadril" />
+            <span class="unit">cm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Braço -->
+      <div class="row two inpt-row">
+        <div class="erro">
+          <label>Braço</label>
+          <small class="error" style="margin-right: -9px;" *ngIf="hasError('braco_esq') || hasError('braco_dir')">*</small>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="braco_esq" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">esquerdo</div>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="braco_dir" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">direito</div>
+        </div>
+      </div>
+
+      <!-- Antebraço -->
+      <div class="row two inpt-row">
+        <div class="erro">
+          <label>Antebraço</label>
+          <small class="error" style="margin-right: -9px;" *ngIf="hasError('antebraco_esq') || hasError('antebraco_dir')">*</small>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="antebraco_esq" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">esquerdo</div>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="antebraco_dir" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">direito</div>
+        </div>
+      </div>
+
+      <!-- Coxa -->
+      <div class="row two inpt-row">
+        <div class="erro">
+          <label>Coxa</label>
+          <small class="error" style="margin-right: -9px;" *ngIf="hasError('coxa_esq') || hasError('coxa_dir')">*</small>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="coxa_esq" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">esquerdo</div>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="coxa_dir" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">direito</div>
+        </div>
+      </div>
+
+      <!-- Panturrilha -->
+      <div class="row two inpt-row">
+        <div class="erro">
+          <label>Panturrilha</label>
+          <small class="error" style="margin-right: -11px;" *ngIf="hasError('panturrilha_esq') || hasError('panturrilha_dir')">*</small>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="panturrilha_esq" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">esquerdo</div>
+        </div>
+
+        <div class="field row-field">
+          <div class="input-with-unit whith-one">
+            <input type="text" formControlName="panturrilha_dir" />
+            <span class="unit">cm</span>
+          </div>
+          <div class="small-caption">direito</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Dobras cutâneas -->
+      <h4 class="group-title">Dobras cutâneas</h4>
+
+      <div class="row two">
+        <div class="field">
+          <div class="erro">
+            <label>Subescapular</label>
+            <small class="error" *ngIf="hasError('subescapular')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="subescapular" />
+            <span class="unit">mm</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="erro">
+            <label>Tríceps</label>
+            <small class="error" *ngIf="hasError('triceps')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="triceps" />
+            <span class="unit">mm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row two">
+        <div class="field">
+          <div class="erro">
+            <label>Peitoral</label>
+            <small class="error" *ngIf="hasError('peitoral')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="peitoral" />
+            <span class="unit">mm</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="erro">
+            <label>Axilar média</label>
+            <small class="error" *ngIf="hasError('axilar')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="axilar" />
+            <span class="unit">mm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row two">
+        <div class="field">
+          <div class="erro">
+            <label>Supra-ilíaca</label>
+            <small class="error" *ngIf="hasError('suprailiaca')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="suprailiaca" />
+            <span class="unit">mm</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="erro">
+            <label>Abdominal</label>
+            <small class="error" *ngIf="hasError('abdominal')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="abdominal" />
+            <span class="unit">mm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row one" style="max-width: 159px">
+        <div class="field">
+          <div class="erro">
+            <label>femural médio</label>
+            <small class="error" *ngIf="hasError('femural')">*</small>
+          </div>
+
+          <div class="input-with-unit">
+            <input type="text" formControlName="femural" />
+            <span class="unit">mm</span>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Objetivos -->
+      <div class="row one">
+        <div class="field">
+          <div class="erro">
+            <label>Objetivos:</label>
+            <small class="error" *ngIf="hasError('objetivos')">*</small>
+          </div>
+
+          <textarea
+            formControlName="objetivos"
+            rows="4"
+            placeholder=""
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- /card -->
+
+    <!-- actions -->
+    <div class="action-bar">
+      <button class="btn btn-outline" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-primary" (click)="saveAssessment()">
+        Ver resultado
+      </button>
+    </div>
+  </div>
+</ion-content>

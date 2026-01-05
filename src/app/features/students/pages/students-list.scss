@@ -1,0 +1,162 @@
+.header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 179px;
+  background: linear-gradient(165deg, #020b2a 21%, #122959 70%, #4e75a4 100%);
+  border-radius: 0 0 20px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 2;
+
+  &_div1 {
+    display: flex;
+    align-items: center;
+    p {
+      margin: 0;
+    }
+    ion-icon {
+      margin: 0 16px 0 24px;
+      font-size: 30px;
+      color: white;
+    }
+    p { color: white; margin-left: 8px; }
+  }
+
+  &_div2 {
+    margin-top: 44px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .search-wrapper {
+      position: relative;
+      input {
+        width: 288px;
+        height: 40px;
+        border: none;
+        background-color: white;
+        color: black;
+        border-radius: 40px;
+        margin: 0 14px 0 24px;
+        padding-left: 51px;
+        font-size: 16px;
+        font-weight: normal;
+        font-family: "Montserrat", sans-serif;
+      }
+      .pesquisa {
+        position: absolute;
+        left: 46px;
+        top: 8px;
+        color: black;
+      }
+    }
+
+    .filter-wrapper {
+      position: relative;
+      margin-right: 20px;
+      ion-icon.filter-icon {
+        font-size: 34px;
+        color: white;
+      }
+
+      .filter-menu {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  width: 160px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(2, 11, 42, 0.16);
+  padding: 8px 8px;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+
+  .filter-title {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 8px;
+    color: #111;
+  }
+
+  .filter-item {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s ease;
+    color: black;
+
+    ion-icon {
+      color: #4e75a4;
+      font-size: 18px;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  .divider {
+    height: 1px;
+    background: #eee;
+    margin: 6px 0;
+  }
+
+  .filter-actions {
+    display: flex;
+    justify-content: center;
+    padding: 0 8px;
+
+    .link {
+      background: transparent;
+      border: none;
+      color: #2b6cff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+  }
+}
+
+    }
+  }
+}
+
+main {
+  height: calc(100vh - 179px);
+  padding: 24px;
+
+  .block {
+    width: 100%;
+    border-radius: 15px;
+    padding: 16px;
+    background-color: #fff;
+  }
+
+  .button {
+    width: 100%;
+    min-height: 56px;
+    color: black;
+    border: solid 1px #e5e5e5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    font-family: "Montserrat", sans-serif;
+
+    ion-icon { font-size: 28px; color: #4e75a4; }
+
+    .student-info { display:flex; flex-direction: column; .name { margin: 0; font-weight: 600; } .meta { color:#888 } }
+  }
+}
