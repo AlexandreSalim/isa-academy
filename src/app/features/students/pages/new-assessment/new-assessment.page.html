@@ -16,7 +16,9 @@
         <div class="field">
           <div class="erro">
             <label>Peso:</label>
-            <small class="error" *ngIf="hasError('peso')">*</small>
+            @if (hasError('peso')) {
+              <small class="error">*</small>
+            }
           </div>
           <div class="input-with-unit">
             <input type="text" formControlName="peso" placeholder="" />
@@ -27,7 +29,9 @@
         <div class="field">
           <div class="erro">
             <label>Altura:</label>
-            <small class="error" *ngIf="hasError('altura')">*</small>
+            @if (hasError('altura')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -46,7 +50,9 @@
         <div class="field">
           <div class="erro">
             <label>Torax</label>
-            <small class="error" *ngIf="hasError('torax')">*</small>
+            @if (hasError('torax')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -57,7 +63,9 @@
         <div class="field">
           <div class="erro">
             <label>Cintura</label>
-            <small class="error" *ngIf="hasError('cintura')">*</small>
+            @if (hasError('cintura')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -71,7 +79,9 @@
         <div class="field">
           <div class="erro">
             <label>Abdome</label>
-            <small class="error" *ngIf="hasError('abdome')">*</small>
+            @if (hasError('abdome')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -82,7 +92,9 @@
         <div class="field">
           <div class="erro">
             <label>Quadril</label>
-            <small class="error" *ngIf="hasError('quadril')">*</small>
+            @if (hasError('quadril')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -96,7 +108,9 @@
       <div class="row two inpt-row">
         <div class="erro">
           <label>Braço</label>
-          <small class="error" style="margin-right: -9px;" *ngIf="hasError('braco_esq') || hasError('braco_dir')">*</small>
+          @if (hasError('braco_esq') || hasError('braco_dir')) {
+            <small class="error" style="margin-right: -9px;">*</small>
+          }
         </div>
 
         <div class="field row-field">
@@ -120,7 +134,9 @@
       <div class="row two inpt-row">
         <div class="erro">
           <label>Antebraço</label>
-          <small class="error" style="margin-right: -9px;" *ngIf="hasError('antebraco_esq') || hasError('antebraco_dir')">*</small>
+          @if (hasError('antebraco_esq') || hasError('antebraco_dir')) {
+            <small class="error" style="margin-right: -9px;">*</small>
+          }
         </div>
 
         <div class="field row-field">
@@ -144,7 +160,9 @@
       <div class="row two inpt-row">
         <div class="erro">
           <label>Coxa</label>
-          <small class="error" style="margin-right: -9px;" *ngIf="hasError('coxa_esq') || hasError('coxa_dir')">*</small>
+          @if (hasError('coxa_esq') || hasError('coxa_dir')) {
+            <small class="error" style="margin-right: -9px;">*</small>
+          }
         </div>
 
         <div class="field row-field">
@@ -168,7 +186,9 @@
       <div class="row two inpt-row">
         <div class="erro">
           <label>Panturrilha</label>
-          <small class="error" style="margin-right: -11px;" *ngIf="hasError('panturrilha_esq') || hasError('panturrilha_dir')">*</small>
+          @if (hasError('panturrilha_esq') || hasError('panturrilha_dir')) {
+            <small class="error" style="margin-right: -11px;">*</small>
+          }
         </div>
 
         <div class="field row-field">
@@ -197,7 +217,9 @@
         <div class="field">
           <div class="erro">
             <label>Subescapular</label>
-            <small class="error" *ngIf="hasError('subescapular')">*</small>
+            @if (hasError('subescapular')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -208,7 +230,9 @@
         <div class="field">
           <div class="erro">
             <label>Tríceps</label>
-            <small class="error" *ngIf="hasError('triceps')">*</small>
+            @if (hasError('triceps')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -222,7 +246,9 @@
         <div class="field">
           <div class="erro">
             <label>Peitoral</label>
-            <small class="error" *ngIf="hasError('peitoral')">*</small>
+            @if (hasError('peitoral')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -233,7 +259,9 @@
         <div class="field">
           <div class="erro">
             <label>Axilar média</label>
-            <small class="error" *ngIf="hasError('axilar')">*</small>
+            @if (hasError('axilar')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -247,7 +275,9 @@
         <div class="field">
           <div class="erro">
             <label>Supra-ilíaca</label>
-            <small class="error" *ngIf="hasError('suprailiaca')">*</small>
+            @if (hasError('suprailiaca')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -258,7 +288,9 @@
         <div class="field">
           <div class="erro">
             <label>Abdominal</label>
-            <small class="error" *ngIf="hasError('abdominal')">*</small>
+            @if (hasError('abdominal')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -272,7 +304,9 @@
         <div class="field">
           <div class="erro">
             <label>femural médio</label>
-            <small class="error" *ngIf="hasError('femural')">*</small>
+            @if (hasError('femural')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <div class="input-with-unit">
@@ -289,7 +323,9 @@
         <div class="field">
           <div class="erro">
             <label>Objetivos:</label>
-            <small class="error" *ngIf="hasError('objetivos')">*</small>
+            @if (hasError('objetivos')) {
+              <small class="error">*</small>
+            }
           </div>
 
           <textarea

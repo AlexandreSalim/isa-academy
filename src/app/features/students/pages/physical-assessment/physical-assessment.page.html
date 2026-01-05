@@ -15,224 +15,215 @@
       </div>
     </section>
 
-    <section *ngIf="assessments.length > 0; else noAssessments">
-
-      <!-- SWIPER apenas para a PRIMEIRA avaliação -->
-      <div *ngIf="assessments[0]" class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <!-- Slide 1: Geral -->
-          <div class="swiper-slide">
-            <header class="card-top">
-              <h4>Avaliação {{ assessments[0].id }}</h4>
-              <small>Feita em {{ assessments[0].evaluation_date | date:'dd/MM/yyyy' }}</small>
-            </header>
-            <div class="card">
-
-              <div class="chip-row">
-                <span class="chip active">geral</span>
-                <span class="chip">perímetros</span>
-                <span class="chip">dobras cutâneas</span>
+    @if (assessments.length > 0) {
+      <section>
+        <!-- SWIPER apenas para a PRIMEIRA avaliação -->
+        @if (assessments[0]) {
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <!-- Slide 1: Geral -->
+              <div class="swiper-slide">
+                <header class="card-top">
+                  <h4>Avaliação {{ assessments[0].id }}</h4>
+                  <small>Feita em {{ assessments[0].evaluation_date | date:'dd/MM/yyyy' }}</small>
+                </header>
+                <div class="card">
+                  <div class="chip-row">
+                    <span class="chip active">geral</span>
+                    <span class="chip">perímetros</span>
+                    <span class="chip">dobras cutâneas</span>
+                  </div>
+                  <ul class="card-list">
+                    <li><ion-icon name="barbell-outline"></ion-icon> <strong>Peso:</strong> {{ assessments[0].weight ?? '-' }}</li>
+                    <li><ion-icon name="resize-outline"></ion-icon> <strong>Altura:</strong> {{ assessments[0].height ?? '-' }}</li>
+                    <li><ion-icon name="speedometer-outline"></ion-icon> <strong>IMC:</strong> {{ assessments[0].imc ?? '-' }}</li>
+                    <li><ion-icon name="pulse-outline"></ion-icon> <strong>Dens. corporal:</strong> {{ assessments[0].densidade ?? '-' }}</li>
+                    <li><ion-icon name="leaf-outline"></ion-icon> <strong>% Gordura:</strong> {{ assessments[0].percentual_gordura ?? '-' }}</li>
+                    <li><ion-icon name="card-outline"></ion-icon> <strong>Massa magra:</strong> {{ assessments[0].massa_magra ?? '-' }}</li>
+                  </ul>
+                </div>
               </div>
-
-              <ul class="card-list">
-                <li><ion-icon name="barbell-outline"></ion-icon> <strong>Peso:</strong> {{ assessments[0].weight ?? '-' }}</li>
-                <li><ion-icon name="resize-outline"></ion-icon> <strong>Altura:</strong> {{ assessments[0].height ?? '-' }}</li>
-                <li><ion-icon name="speedometer-outline"></ion-icon> <strong>IMC:</strong> {{ assessments[0].imc ?? '-' }}</li>
-                <li><ion-icon name="pulse-outline"></ion-icon> <strong>Dens. corporal:</strong> {{ assessments[0].densidade ?? '-' }}</li>
-                <li><ion-icon name="leaf-outline"></ion-icon> <strong>% Gordura:</strong> {{ assessments[0].percentual_gordura ?? '-' }}</li>
-                <li><ion-icon name="card-outline"></ion-icon> <strong>Massa magra:</strong> {{ assessments[0].massa_magra ?? '-' }}</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Slide 2: Perímetros -->
-          <div class="swiper-slide">
-            <header class="card-top">
-              <h4>Avaliação {{ assessments[0].id }}</h4>
-              <small>Feita em {{ assessments[0].evaluation_date | date:'dd/MM/yyyy' }}</small>
-            </header>
-            <div class="card">
-
-              <div class="chip-row">
-                <span class="chip">geral</span>
-                <span class="chip active">perímetros</span>
-                <span class="chip">dobras cutâneas</span>
-              </div>
-
-              <ul class="card-list card-list-2">
-                <div>
-                  <li><ion-icon name="body-outline"></ion-icon> <strong>Tórax:</strong> {{ assessments[0].chest ?? '00cm' }}</li>
-                <li><ion-icon name="body-outline"></ion-icon> <strong>Abdome:</strong> {{ assessments[0].abdomen ?? '00cm' }}</li>
-                </div>
-                
-                <div>
-                  <li><ion-icon name="body-outline"></ion-icon> <strong>Cintura:</strong> {{ assessments[0].waist ?? '00cm' }}</li>
-                  <li><ion-icon name="body-outline"></ion-icon> <strong>Quadril:</strong> {{ assessments[0].hip ?? '00cm' }}</li>
-                </div>
-
-                <div>
-                  <li><ion-icon name="hand-left-outline"></ion-icon> <strong>Braço E:</strong> {{ assessments[0].arm_left ?? '00,0cm' }}</li>
-                  <li><ion-icon name="hand-right-outline"></ion-icon> <strong>Braço D:</strong> {{ assessments[0].arm_right ?? '00,0cm' }}</li>
-                </div>
-
-                <div>
-                  <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa E:</strong> {{ assessments[0].thigh_left ?? '00,0cm' }}</li>
-                  <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa D:</strong> {{ assessments[0].thigh_right ?? '00,0cm' }}</li>
-                </div>
-
-                <div>
-                  <li  style="display: flex;align-items: center;">
-                    <ion-icon name="walk-outline"></ion-icon> 
-                    <div style="position: relative;">
-                      <strong>Panturrilha E:</strong> 
-                      <p style="margin: 0;position: absolute;top: 15px;">
-                      {{ assessments[0].calf_left ?? '00,0cm' }}
-                    </p>    
+              <!-- Slide 2: Perímetros -->
+              <div class="swiper-slide">
+                <header class="card-top">
+                  <h4>Avaliação {{ assessments[0].id }}</h4>
+                  <small>Feita em {{ assessments[0].evaluation_date | date:'dd/MM/yyyy' }}</small>
+                </header>
+                <div class="card">
+                  <div class="chip-row">
+                    <span class="chip">geral</span>
+                    <span class="chip active">perímetros</span>
+                    <span class="chip">dobras cutâneas</span>
+                  </div>
+                  <ul class="card-list card-list-2">
+                    <div>
+                      <li><ion-icon name="body-outline"></ion-icon> <strong>Tórax:</strong> {{ assessments[0].chest ?? '00cm' }}</li>
+                      <li><ion-icon name="body-outline"></ion-icon> <strong>Abdome:</strong> {{ assessments[0].abdomen ?? '00cm' }}</li>
                     </div>
-                  </li>
-                  
-                  <li style="display: flex;align-items: center;">
-                    <ion-icon name="walk-outline"></ion-icon>
-                    <div style="position: relative;">
-                      <strong>Panturrilha D:</strong> 
-                  <p style="margin: 0;position: absolute;top: 15px;">{{ assessments[0].calf_right ?? '00,0cm' }}</p>
+                    <div>
+                      <li><ion-icon name="body-outline"></ion-icon> <strong>Cintura:</strong> {{ assessments[0].waist ?? '00cm' }}</li>
+                      <li><ion-icon name="body-outline"></ion-icon> <strong>Quadril:</strong> {{ assessments[0].hip ?? '00cm' }}</li>
                     </div>
-                </li>
+                    <div>
+                      <li><ion-icon name="hand-left-outline"></ion-icon> <strong>Braço E:</strong> {{ assessments[0].arm_left ?? '00,0cm' }}</li>
+                      <li><ion-icon name="hand-right-outline"></ion-icon> <strong>Braço D:</strong> {{ assessments[0].arm_right ?? '00,0cm' }}</li>
+                    </div>
+                    <div>
+                      <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa E:</strong> {{ assessments[0].thigh_left ?? '00,0cm' }}</li>
+                      <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa D:</strong> {{ assessments[0].thigh_right ?? '00,0cm' }}</li>
+                    </div>
+                    <div>
+                      <li  style="display: flex;align-items: center;">
+                        <ion-icon name="walk-outline"></ion-icon>
+                        <div style="position: relative;">
+                          <strong>Panturrilha E:</strong>
+                          <p style="margin: 0;position: absolute;top: 15px;">
+                            {{ assessments[0].calf_left ?? '00,0cm' }}
+                          </p>
+                        </div>
+                      </li>
+                      <li style="display: flex;align-items: center;">
+                        <ion-icon name="walk-outline"></ion-icon>
+                        <div style="position: relative;">
+                          <strong>Panturrilha D:</strong>
+                          <p style="margin: 0;position: absolute;top: 15px;">{{ assessments[0].calf_right ?? '00,0cm' }}</p>
+                        </div>
+                      </li>
+                    </div>
+                  </ul>
                 </div>
-
-              </ul>
-            </div>
-          </div>
-
-          <!-- Slide 3: Dobras cutâneas -->
-          <div class="swiper-slide dobras">
-            <header class="card-top">
-              <h4>Avaliação {{ assessments[0].id }}</h4>
-              <small>Feita em {{ assessments[0].evaluation_date | date:'dd/MM/yyyy' }}</small>
-            </header>
-
-            <div class="card">
-              <div class="chip-row">
-                <span class="chip">geral</span>
-                <span class="chip">perímetros</span>
-                <span class="chip active">dobras cutâneas</span>
               </div>
-
-              <ul class="card-list">
-                <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Subescapular:</strong> {{ assessments[0].subscapular ?? '00mm' }}</li>
-                <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Tríceps:</strong> {{ assessments[0].triceps ?? '00mm' }}</li>
-                <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Peitoral:</strong> {{ assessments[0].chest_skinfold ?? '00mm' }}</li>
-                <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Axilar média:</strong> {{ assessments[0].mid_axillary ?? '00mm' }}</li>
-                <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Supra-ilíaca:</strong> {{ assessments[0].suprailiac ?? '00mm' }}</li>
-                <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Abdominal:</strong> {{ assessments[0].abdominal_skinfold ?? '00mm' }}</li>
-                <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Femoral média:</strong> {{ assessments[0].femoral ?? '00mm' }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-pagination" style="bottom: 35px;"></div>
-      </div>
-
-      <!-- AVALIAÇÕES ANTERIORES - CADA UMA COM SEU PRÓPRIO CARD (igual ao primeiro) -->
-      <div *ngIf="!showAllAssessments" class="older-assessments-container">
-        <h3 class="older-assessments-title" style="text-align: center;color: #020b2a;">Avaliações Anteriores</h3>
-        
-        <div class="swiper-slide-back">
-          <div *ngFor="let assessment of olderAssessments; let i = index" class="older-assessment-card">
-            
-            <!-- Cada avaliação antiga tem um card completo como a primeira -->
-            <div class="assessment-full-card" style="background-color: white;border-radius: 10px;height: 380px;">
-              <header class="card-top">
-                <h4>Avaliação {{ assessment.id }}</h4>
-                <small>Feita em {{ assessment.evaluation_date | date:'dd/MM/yyyy' }}</small>
-              </header>
-              
-              <!-- Abas para navegação -->
-              <div class="chip-row" style="padding: 14px 14px 0 14px;margin-bottom: -4px;">
-                <span class="chip" 
-                      [class.active]="assessment.activeTab === 'geral' || !assessment.activeTab" 
-                      (click)="switchToTab(assessment, 'geral')">
-                  geral
-                </span>
-                <span class="chip" 
-                      [class.active]="assessment.activeTab === 'perimetros'" 
-                      (click)="switchToTab(assessment, 'perimetros')">
-                  perímetros
-                </span>
-                <span class="chip" 
-                      [class.active]="assessment.activeTab === 'dobras'" 
-                      (click)="switchToTab(assessment, 'dobras')">
-                  dobras cutâneas
-                </span>
-              </div>
-
-              <!-- Conteúdo da aba GERAL -->
-              <div *ngIf="assessment.activeTab === 'geral' || !assessment.activeTab" class="card">
-                <ul class="card-list">
-                  <li><ion-icon name="barbell-outline"></ion-icon> <strong>Peso:</strong> {{ assessment.weight ?? '-' }}</li>
-                  <li><ion-icon name="resize-outline"></ion-icon> <strong>Altura:</strong> {{ assessment.height ?? '-' }}</li>
-                  <li><ion-icon name="speedometer-outline"></ion-icon> <strong>IMC:</strong> {{ assessment.imc ?? '-' }}</li>
-                  <li><ion-icon name="pulse-outline"></ion-icon> <strong>Dens. corporal:</strong> {{ assessment.densidade ?? '-' }}</li>
-                  <li><ion-icon name="leaf-outline"></ion-icon> <strong>% Gordura:</strong> {{ assessment.percentual_gordura ?? '-' }}</li>
-                  <li><ion-icon name="card-outline"></ion-icon> <strong>Massa magra:</strong> {{ assessment.massa_magra ?? '-' }}</li>
-                </ul>
-              </div>
-
-              <!-- Conteúdo da aba PERÍMETROS -->
-              <div *ngIf="assessment.activeTab === 'perimetros'" class="card">
-                <ul class="card-list">
-                  <li><ion-icon name="body-outline"></ion-icon> <strong>Tórax:</strong> {{ assessment.chest ?? '00cm' }}</li>
-                  <li><ion-icon name="body-outline"></ion-icon> <strong>Abdome:</strong> {{ assessment.abdomen ?? '00cm' }}</li>
-                  <li><ion-icon name="body-outline"></ion-icon> <strong>Cintura:</strong> {{ assessment.waist ?? '00cm' }}</li>
-                  <li><ion-icon name="body-outline"></ion-icon> <strong>Quadril:</strong> {{ assessment.hip ?? '00cm' }}</li>
-                  <li><ion-icon name="hand-left-outline"></ion-icon> <strong>Braço E:</strong> {{ assessment.arm_left ?? '00,0cm' }}</li>
-                  <li><ion-icon name="hand-right-outline"></ion-icon> <strong>Braço D:</strong> {{ assessment.arm_right ?? '00,0cm' }}</li>
-                  <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa E:</strong> {{ assessment.thigh_left ?? '00,0cm' }}</li>
-                  <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa D:</strong> {{ assessment.thigh_right ?? '00,0cm' }}</li>
-                </ul>
-              </div>
-
-              <!-- Conteúdo da aba DOBRAS CUTÂNEAS -->
-              <div *ngIf="assessment.activeTab === 'dobras'" class="card dobras-card">
-                <ul class="card-list">
-                  <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Subescapular:</strong> {{ assessment.subscapular ?? '00mm' }}</li>
-                  <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Tríceps:</strong> {{ assessment.triceps ?? '00mm' }}</li>
-                  <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Peitoral:</strong> {{ assessment.chest_skinfold ?? '00mm' }}</li>
-                  <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Axilar média:</strong> {{ assessment.mid_axillary ?? '00mm' }}</li>
-                  <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Supra-ilíaca:</strong> {{ assessment.suprailiac ?? '00mm' }}</li>
-                  <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Abdominal:</strong> {{ assessment.abdominal_skinfold ?? '00mm' }}</li>
-                  <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Femoral média:</strong> {{ assessment.femoral ?? '00mm' }}</li>
-                </ul>
+              <!-- Slide 3: Dobras cutâneas -->
+              <div class="swiper-slide dobras">
+                <header class="card-top">
+                  <h4>Avaliação {{ assessments[0].id }}</h4>
+                  <small>Feita em {{ assessments[0].evaluation_date | date:'dd/MM/yyyy' }}</small>
+                </header>
+                <div class="card">
+                  <div class="chip-row">
+                    <span class="chip">geral</span>
+                    <span class="chip">perímetros</span>
+                    <span class="chip active">dobras cutâneas</span>
+                  </div>
+                  <ul class="card-list">
+                    <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Subescapular:</strong> {{ assessments[0].subscapular ?? '00mm' }}</li>
+                    <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Tríceps:</strong> {{ assessments[0].triceps ?? '00mm' }}</li>
+                    <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Peitoral:</strong> {{ assessments[0].chest_skinfold ?? '00mm' }}</li>
+                    <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Axilar média:</strong> {{ assessments[0].mid_axillary ?? '00mm' }}</li>
+                    <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Supra-ilíaca:</strong> {{ assessments[0].suprailiac ?? '00mm' }}</li>
+                    <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Abdominal:</strong> {{ assessments[0].abdominal_skinfold ?? '00mm' }}</li>
+                    <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Femoral média:</strong> {{ assessments[0].femoral ?? '00mm' }}</li>
+                  </ul>
+                </div>
               </div>
             </div>
+            <div class="swiper-pagination" style="bottom: 35px;"></div>
           </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- BOTÃO PARA MOSTRAR/OCULTAR OUTRAS AVALIAÇÕES -->
-    <section *ngIf="hasMoreAssessments" style="color: black; margin-top: 20px;">
-      <div 
-        style="display: flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer;"
-        (click)="toggleOtherAssessments()"
-      >
-        <p style="margin: 0;">
-          {{ showAllAssessments ? 'Ver ' + additionalAssessmentsCount + ' avaliações anteriores' : 'Ocultar avaliações anteriores' }}
-        </p> 
-        <ion-icon 
-          [name]="showAllAssessments ? 'chevron-down-outline' : 'chevron-up-outline'"
-        ></ion-icon>
-      </div>
-    </section>
-
-    <ng-template #noAssessments>
+        }
+        <!-- AVALIAÇÕES ANTERIORES - CADA UMA COM SEU PRÓPRIO CARD (igual ao primeiro) -->
+        @if (!showAllAssessments) {
+          <div class="older-assessments-container">
+            <h3 class="older-assessments-title" style="text-align: center;color: #020b2a;">Avaliações Anteriores</h3>
+            <div class="swiper-slide-back">
+              @for (assessment of olderAssessments; track assessment; let i = $index) {
+                <div class="older-assessment-card">
+                  <!-- Cada avaliação antiga tem um card completo como a primeira -->
+                  <div class="assessment-full-card" style="background-color: white;border-radius: 10px;height: 380px;">
+                    <header class="card-top">
+                      <h4>Avaliação {{ assessment.id }}</h4>
+                      <small>Feita em {{ assessment.evaluation_date | date:'dd/MM/yyyy' }}</small>
+                    </header>
+                    <!-- Abas para navegação -->
+                    <div class="chip-row" style="padding: 14px 14px 0 14px;margin-bottom: -4px;">
+                      <span class="chip"
+                        [class.active]="assessment.activeTab === 'geral' || !assessment.activeTab"
+                        (click)="switchToTab(assessment, 'geral')">
+                        geral
+                      </span>
+                      <span class="chip"
+                        [class.active]="assessment.activeTab === 'perimetros'"
+                        (click)="switchToTab(assessment, 'perimetros')">
+                        perímetros
+                      </span>
+                      <span class="chip"
+                        [class.active]="assessment.activeTab === 'dobras'"
+                        (click)="switchToTab(assessment, 'dobras')">
+                        dobras cutâneas
+                      </span>
+                    </div>
+                    <!-- Conteúdo da aba GERAL -->
+                    @if (assessment.activeTab === 'geral' || !assessment.activeTab) {
+                      <div class="card">
+                        <ul class="card-list">
+                          <li><ion-icon name="barbell-outline"></ion-icon> <strong>Peso:</strong> {{ assessment.weight ?? '-' }}</li>
+                          <li><ion-icon name="resize-outline"></ion-icon> <strong>Altura:</strong> {{ assessment.height ?? '-' }}</li>
+                          <li><ion-icon name="speedometer-outline"></ion-icon> <strong>IMC:</strong> {{ assessment.imc ?? '-' }}</li>
+                          <li><ion-icon name="pulse-outline"></ion-icon> <strong>Dens. corporal:</strong> {{ assessment.densidade ?? '-' }}</li>
+                          <li><ion-icon name="leaf-outline"></ion-icon> <strong>% Gordura:</strong> {{ assessment.percentual_gordura ?? '-' }}</li>
+                          <li><ion-icon name="card-outline"></ion-icon> <strong>Massa magra:</strong> {{ assessment.massa_magra ?? '-' }}</li>
+                        </ul>
+                      </div>
+                    }
+                    <!-- Conteúdo da aba PERÍMETROS -->
+                    @if (assessment.activeTab === 'perimetros') {
+                      <div class="card">
+                        <ul class="card-list">
+                          <li><ion-icon name="body-outline"></ion-icon> <strong>Tórax:</strong> {{ assessment.chest ?? '00cm' }}</li>
+                          <li><ion-icon name="body-outline"></ion-icon> <strong>Abdome:</strong> {{ assessment.abdomen ?? '00cm' }}</li>
+                          <li><ion-icon name="body-outline"></ion-icon> <strong>Cintura:</strong> {{ assessment.waist ?? '00cm' }}</li>
+                          <li><ion-icon name="body-outline"></ion-icon> <strong>Quadril:</strong> {{ assessment.hip ?? '00cm' }}</li>
+                          <li><ion-icon name="hand-left-outline"></ion-icon> <strong>Braço E:</strong> {{ assessment.arm_left ?? '00,0cm' }}</li>
+                          <li><ion-icon name="hand-right-outline"></ion-icon> <strong>Braço D:</strong> {{ assessment.arm_right ?? '00,0cm' }}</li>
+                          <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa E:</strong> {{ assessment.thigh_left ?? '00,0cm' }}</li>
+                          <li><ion-icon name="walk-outline"></ion-icon> <strong>Coxa D:</strong> {{ assessment.thigh_right ?? '00,0cm' }}</li>
+                        </ul>
+                      </div>
+                    }
+                    <!-- Conteúdo da aba DOBRAS CUTÂNEAS -->
+                    @if (assessment.activeTab === 'dobras') {
+                      <div class="card dobras-card">
+                        <ul class="card-list">
+                          <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Subescapular:</strong> {{ assessment.subscapular ?? '00mm' }}</li>
+                          <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Tríceps:</strong> {{ assessment.triceps ?? '00mm' }}</li>
+                          <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Peitoral:</strong> {{ assessment.chest_skinfold ?? '00mm' }}</li>
+                          <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Axilar média:</strong> {{ assessment.mid_axillary ?? '00mm' }}</li>
+                          <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Supra-ilíaca:</strong> {{ assessment.suprailiac ?? '00mm' }}</li>
+                          <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Abdominal:</strong> {{ assessment.abdominal_skinfold ?? '00mm' }}</li>
+                          <li><ion-icon name="ellipse-outline"></ion-icon> <strong>Femoral média:</strong> {{ assessment.femoral ?? '00mm' }}</li>
+                        </ul>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </section>
+    } @else {
       <!-- Se preferir, pode mostrar um card sugerindo criar avaliação -->
       <div class="no-assessments">
         <p>Sem avaliações. Crie a primeira avaliação.</p>
       </div>
-    </ng-template>
+    }
+
+    <!-- BOTÃO PARA MOSTRAR/OCULTAR OUTRAS AVALIAÇÕES -->
+    @if (hasMoreAssessments) {
+      <section style="color: black; margin-top: 20px;">
+        <div
+          style="display: flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer;"
+          (click)="toggleOtherAssessments()"
+          >
+          <p style="margin: 0;">
+            {{ showAllAssessments ? 'Ver ' + additionalAssessmentsCount + ' avaliações anteriores' : 'Ocultar avaliações anteriores' }}
+          </p>
+          <ion-icon
+            [name]="showAllAssessments ? 'chevron-down-outline' : 'chevron-up-outline'"
+          ></ion-icon>
+        </div>
+      </section>
+    }
+
 
   </main>
 </ion-content>

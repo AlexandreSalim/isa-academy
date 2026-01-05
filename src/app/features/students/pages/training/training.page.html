@@ -9,158 +9,167 @@
     </button>
 
     <!-- Atualizar treino -->
-    <div class="update-treino" *ngIf="trainingCompleted" else="#semTreino">
-      <div class="update-left">
-        <ion-icon name="camera-outline"></ion-icon>
-        <strong>Atualizar treino em:</strong>
-      </div>
-      <div>
-        <span>10/12/2025</span>
-        <ion-icon name="pencil-outline" class="edit-icon"></ion-icon>
-      </div>
-    </div>
-
-    <div
-      *ngIf="!trainingCompleted"
-      class="update-treino"
-      style="justify-content: center"
-      #semTreino
-    >
-      <p>Este aluno não possui treino</p>
-    </div>
-
-    <section class="treino-serie" *ngIf="trainingCompleted">
-      <!-- Tabs de séries -->
-      <div class="series-tabs">
-        <button
-          *ngFor="let serie of series"
-          class="tab"
-          [class.active]="activeSerie === serie"
-          [class.hidden]="!series.includes(serie)"
-          (click)="series.includes(serie) ? selectSerie(serie) : null"
-          [disabled]="!series.includes(serie)"
-        >
-          Série {{ serie }}
-          <span *ngIf="!series.includes(serie)" class="empty-indicator"
-            >(vazia)</span
-          >
-        </button>
-        <button
-          class="tab outline"
-          (click)="addNewSerie()"
-          *ngIf="canAddMoreSeries"
-        >
-          + série
-        </button>
-      </div>
-
-      <!-- Cabeçalho da série -->
-      <div class="serie-header">
-        <span
-          >Série {{ activeSerie }} - Total: {{ filteredExercises.length }}
-          exercícios</span
-        >
-        <div class="serie-actions">
-          <ion-icon
-            name="trash-outline"
-            (click)="deleteSerieCompleta(activeSerie, $event)"
-            *ngIf="series.length > 1"
-          ></ion-icon>
-          <!-- <ion-icon name="pencil-outline"></ion-icon> -->
+    @if (trainingCompleted) {
+      <div class="update-treino" else="#semTreino">
+        <div class="update-left">
+          <ion-icon name="camera-outline"></ion-icon>
+          <strong>Atualizar treino em:</strong>
+        </div>
+        <div>
+          <span>10/12/2025</span>
+          <ion-icon name="pencil-outline" class="edit-icon"></ion-icon>
         </div>
       </div>
+    }
 
-      <!-- Adicionar exercício -->
-      <div class="add-exercicio" (click)="openDialogExercicio()">
-        <ion-icon name="add-circle-outline"></ion-icon>
-        <span>Adicionar Exercício</span>
-      </div>
-
-      <!-- Lista de exercícios com Drag & Drop -->
+    @if (!trainingCompleted) {
       <div
-        class="lista-exercicios"
-        cdkDropList
-        [cdkDropListData]="exercises"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <ng-container *ngFor="let exercise of exercises; let i = index">
-          <div
-            class="exercicio-card"
-            cdkDrag
-            [attr.data-index]="i"
-            *ngIf="activeSerie === exercise.serie"
-          >
-            <!-- handle: o ícone menu-outline -->
-            <!-- <div class="drag-icon" cdkDragHandle>
-              <ion-icon name="menu-outline" class="drag-handle"></ion-icon>
-            </div> -->
+        class="update-treino"
+        style="justify-content: center"
+        #semTreino
+        >
+        <p>Este aluno não possui treino</p>
+      </div>
+    }
 
-            <div class="exercicio-info">
-              <h4>{{ exercise.exercise_name || 'Exercício sem nome' }}</h4>
-              <p>{{ exercise.notes }}</p>
-
-              <div class="exercicio-dados">
-                <div>
-                  <span>Séries</span>
-                  <strong>{{ exercise.number_of_sets }}</strong>
-                </div>
-                <div>
-                  <span>Repetição</span>
-                  <strong>{{ exercise.repetitions }}</strong>
-                </div>
-                <div>
-                  <span>Carga</span>
-                  <strong>{{ exercise.weight }}</strong>
-                </div>
-                <div *ngIf="exercise.time > 0">
-                  <span>Tempo</span>
-                  <strong>{{ exercise.time }}s</strong>
-                </div>
+    @if (trainingCompleted) {
+      <section class="treino-serie">
+        <!-- Tabs de séries -->
+        <div class="series-tabs">
+          @for (serie of series; track serie) {
+            <button
+              class="tab"
+              [class.active]="activeSerie === serie"
+              [class.hidden]="!series.includes(serie)"
+              (click)="series.includes(serie) ? selectSerie(serie) : null"
+              [disabled]="!series.includes(serie)"
+              >
+              Série {{ serie }}
+              @if (!series.includes(serie)) {
+                <span class="empty-indicator"
+                  >(vazia)</span
+                  >
+                }
+              </button>
+            }
+            @if (canAddMoreSeries) {
+              <button
+                class="tab outline"
+                (click)="addNewSerie()"
+                >
+                + série
+              </button>
+            }
+          </div>
+          <!-- Cabeçalho da série -->
+          <div class="serie-header">
+            <span
+              >Série {{ activeSerie }} - Total: {{ filteredExercises.length }}
+              exercícios</span
+              >
+              <div class="serie-actions">
+                @if (series.length > 1) {
+                  <ion-icon
+                    name="trash-outline"
+                    (click)="deleteSerieCompleta(activeSerie, $event)"
+                  ></ion-icon>
+                }
+                <!-- <ion-icon name="pencil-outline"></ion-icon> -->
               </div>
             </div>
-
-            <div class="more-icon">
-              <button
-                type="button"
-                class="more-btn"
-                mat-icon-button
-                [matMenuTriggerFor]="aboveMenu"
-                aria-label="Mais opções"
-              >
-                <ion-icon name="ellipsis-vertical"></ion-icon>
-              </button>
-              <mat-menu
-                #aboveMenu="matMenu"
-                yPosition="above"
-                xPosition="after"
-                panelClass="custom-menu-panel"
-              >
-                <button
-                  mat-menu-item
-                  class="menu-item excluir"
-                  (click)="deleteWorkoutExercise(exercise, i)"
-                >
-                  Excluir
-                </button>
-                <button
-                  mat-menu-item
-                  class="menu-item editar"
-                  (click)="editWorkoutExercise(exercise, i)"
-                >
-                  Editar
-                </button>
-              </mat-menu>
+            <!-- Adicionar exercício -->
+            <div class="add-exercicio" (click)="openDialogExercicio()">
+              <ion-icon name="add-circle-outline"></ion-icon>
+              <span>Adicionar Exercício</span>
             </div>
+            <!-- Lista de exercícios com Drag & Drop -->
+            <div
+              class="lista-exercicios"
+              cdkDropList
+              [cdkDropListData]="exercises"
+              (cdkDropListDropped)="drop($event)"
+              >
+              @for (exercise of exercises; track exercise; let i = $index) {
+                @if (activeSerie === exercise.serie) {
+                  <div
+                    class="exercicio-card"
+                    cdkDrag
+                    [attr.data-index]="i"
+                    >
+                    <!-- handle: o ícone menu-outline -->
+                    <!-- <div class="drag-icon" cdkDragHandle>
+                    <ion-icon name="menu-outline" class="drag-handle"></ion-icon>
+                  </div> -->
+                  <div class="exercicio-info">
+                    <h4>{{ exercise.exercise_name || 'Exercício sem nome' }}</h4>
+                    <p>{{ exercise.notes }}</p>
+                    <div class="exercicio-dados">
+                      <div>
+                        <span>Séries</span>
+                        <strong>{{ exercise.number_of_sets }}</strong>
+                      </div>
+                      <div>
+                        <span>Repetição</span>
+                        <strong>{{ exercise.repetitions }}</strong>
+                      </div>
+                      <div>
+                        <span>Carga</span>
+                        <strong>{{ exercise.weight }}</strong>
+                      </div>
+                      @if (exercise.time > 0) {
+                        <div>
+                          <span>Tempo</span>
+                          <strong>{{ exercise.time }}s</strong>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="more-icon">
+                    <button
+                      type="button"
+                      class="more-btn"
+                      mat-icon-button
+                      [matMenuTriggerFor]="aboveMenu"
+                      aria-label="Mais opções"
+                      >
+                      <ion-icon name="ellipsis-vertical"></ion-icon>
+                    </button>
+                    <mat-menu
+                      #aboveMenu="matMenu"
+                      yPosition="above"
+                      xPosition="after"
+                      panelClass="custom-menu-panel"
+                      >
+                      <button
+                        mat-menu-item
+                        class="menu-item excluir"
+                        (click)="deleteWorkoutExercise(exercise, i)"
+                        >
+                        Excluir
+                      </button>
+                      <button
+                        mat-menu-item
+                        class="menu-item editar"
+                        (click)="editWorkoutExercise(exercise, i)"
+                        >
+                        Editar
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+              }
+            }
           </div>
-        </ng-container>
-      </div>
-    </section>
+        </section>
+      }
 
-    <div *ngIf="trainingCompleted">
-      <button class="button-trash" (click)="deleteCompleteWorkout()">
-        <ion-icon name="trash-outline"></ion-icon>
-        <p>Excluir treino</p>
-      </button>
-    </div>
-  </main>
-</ion-content>
+      @if (trainingCompleted) {
+        <div>
+          <button class="button-trash" (click)="deleteCompleteWorkout()">
+            <ion-icon name="trash-outline"></ion-icon>
+            <p>Excluir treino</p>
+          </button>
+        </div>
+      }
+    </main>
+  </ion-content>

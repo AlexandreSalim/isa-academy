@@ -8,7 +8,7 @@
         justify-content: start;
         padding: 24px 24px 0 24px;
       "
-    >
+      >
       <ion-icon
         name="chevron-back-outline"
         class="back-btn"
@@ -37,23 +37,23 @@
           <p>{{ totals.porcentagemPagos }} dos pagamentos</p>
         </div>
         <!-- <div class="total-recebido" >
-          <p>Total recebido: {{ totals.totalRecebido }}</p>
-        </div> -->
-      </div>
+        <p>Total recebido: {{ totals.totalRecebido }}</p>
+      </div> -->
     </div>
   </div>
+</div>
 
-  <main>
-    <section class="box">
-      <section class="header_div2">
-        <div class="search-wrapper">
-          <ion-icon name="search-outline" class="pesquisa"></ion-icon>
-          <input
-            type="text"
-            placeholder="Buscar"
-            [(ngModel)]="searchTerm"
-            (input)="onSearchChange()"
-            aria-label="Buscar alunos"
+<main>
+  <section class="box">
+    <section class="header_div2">
+      <div class="search-wrapper">
+        <ion-icon name="search-outline" class="pesquisa"></ion-icon>
+        <input
+          type="text"
+          placeholder="Buscar"
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange()"
+          aria-label="Buscar alunos"
           />
         </div>
 
@@ -63,140 +63,147 @@
             <ion-icon name="filter-outline"></ion-icon>
           </button>
 
-          <div class="filter-dropdown" *ngIf="showFilter">
-            <button
-              (click)="selectFilter('A-Z')"
-              [class.active]="selectedFilter === 'A-Z'"
-            >
-              A-Z
-            </button>
-            <button
-              (click)="selectFilter('Z-A')"
-              [class.active]="selectedFilter === 'Z-A'"
-            >
-              Z-A
-            </button>
-            <button
-              (click)="selectFilter('Pago')"
-              [class.active]="selectedFilter === 'Pago'"
-            >
-              Pago
-            </button>
-            <button
-              (click)="selectFilter('Não pago')"
-              [class.active]="selectedFilter === 'Não pago'"
-            >
-              Não pago
-            </button>
-            <button (click)="clearFilter()" class="clear-btn">
-              Limpar filtros
-            </button>
-          </div>
+          @if (showFilter) {
+            <div class="filter-dropdown">
+              <button
+                (click)="selectFilter('A-Z')"
+                [class.active]="selectedFilter === 'A-Z'"
+                >
+                A-Z
+              </button>
+              <button
+                (click)="selectFilter('Z-A')"
+                [class.active]="selectedFilter === 'Z-A'"
+                >
+                Z-A
+              </button>
+              <button
+                (click)="selectFilter('Pago')"
+                [class.active]="selectedFilter === 'Pago'"
+                >
+                Pago
+              </button>
+              <button
+                (click)="selectFilter('Não pago')"
+                [class.active]="selectedFilter === 'Não pago'"
+                >
+                Não pago
+              </button>
+              <button (click)="clearFilter()" class="clear-btn">
+                Limpar filtros
+              </button>
+            </div>
+          }
         </div>
       </section>
 
       <!-- Loading State -->
-      <div *ngIf="loading" class="loading">
-        <ion-spinner name="crescent"></ion-spinner>
-        <p>Carregando dados...</p>
-      </div>
+      @if (loading) {
+        <div class="loading">
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Carregando dados...</p>
+        </div>
+      }
 
       <!-- Error State -->
-      <div *ngIf="errorMessage && !loading" class="error">
-        <ion-icon name="warning-outline"></ion-icon>
-        <p>{{ errorMessage }}</p>
-        <ion-button fill="outline" (click)="carregarDadosMensalidades()">
-          Tentar novamente
-        </ion-button>
-      </div>
+      @if (errorMessage && !loading) {
+        <div class="error">
+          <ion-icon name="warning-outline"></ion-icon>
+          <p>{{ errorMessage }}</p>
+          <ion-button fill="outline" (click)="carregarDadosMensalidades()">
+            Tentar novamente
+          </ion-button>
+        </div>
+      }
 
       <!-- Data -->
-      <section *ngIf="!loading && !errorMessage">
-        <div class="header_alunos">
-          <p>ALUNO</p>
-          <p>VENCE</p>
-          <p>STATUS</p>
-        </div>
-
-        <mat-list role="list">
-          <mat-list-item
-            role="listitem"
-            *ngFor="let info of pagedInfos; let i = index"
-          >
-            <div class="list">
-              <p>{{ info.aluno }}</p>
-              <p>{{ info.vencimento }}</p>
-              <p>
-                <span
-                  class="status"
-                  [class.pago]="info.status === 'pago'"
-                  [class.nao-pago]="info.status !== 'pago'"
-                  (click)="togglePagamento(info)"
-                  [style.cursor]="'pointer'"
+      @if (!loading && !errorMessage) {
+        <section>
+          <div class="header_alunos">
+            <p>ALUNO</p>
+            <p>VENCE</p>
+            <p>STATUS</p>
+          </div>
+          <mat-list role="list">
+            @for (info of pagedInfos; track info; let i = $index) {
+              <mat-list-item
+                role="listitem"
                 >
-                  {{ info.status === 'pago' ? 'Pago' : 'Pendente' }}
-                  <!-- <span
-                    *ngIf="info.status === 'pago' && info.data_pagamento"
-                    class="data-pagamento"
-                  >
-                    ({{ info.data_pagamento }})
-                  </span> -->
-                  <!-- Adicione indicador visual para outros status -->
-                  <!-- <span
+                <div class="list">
+                  <p>{{ info.aluno }}</p>
+                  <p>{{ info.vencimento }}</p>
+                  <p>
+                    <span
+                      class="status"
+                      [class.pago]="info.status === 'pago'"
+                      [class.nao-pago]="info.status !== 'pago'"
+                      (click)="togglePagamento(info)"
+                      [style.cursor]="'pointer'"
+                      >
+                      {{ info.status === 'pago' ? 'Pago' : 'Pendente' }}
+                      <!-- <span
+                      *ngIf="info.status === 'pago' && info.data_pagamento"
+                      class="data-pagamento"
+                      >
+                      ({{ info.data_pagamento }})
+                    </span> -->
+                    <!-- Adicione indicador visual para outros status -->
+                    <!-- <span
                     *ngIf="info.status === 'nao_pago'"
                     class="status-indicator"
                     style="color: #ff9800"
-                  >
+                    >
                     (Não pago)
                   </span> -->
                 </span>
               </p>
             </div>
           </mat-list-item>
-        </mat-list>
-
-        <!-- Mensagem quando não há dados -->
-        <div *ngIf="listaAlunos.length === 0" class="no-data">
+        }
+      </mat-list>
+      <!-- Mensagem quando não há dados -->
+      @if (listaAlunos.length === 0) {
+        <div class="no-data">
           <ion-icon name="receipt-outline"></ion-icon>
           <p style="color: black">
             Nenhum pagamento registrado para {{ month }}
           </p>
         </div>
-
-        <!-- Paginação -->
-        <div class="pagination" *ngIf="filteredInfos.length > 0">
+      }
+      <!-- Paginação -->
+      @if (filteredInfos.length > 0) {
+        <div class="pagination">
           <button
             class="page-btn arrow"
             (click)="prevPage()"
             [disabled]="currentPage === 1"
-          >
+            >
             &lt;
           </button>
-
-          <ng-container *ngFor="let p of pageButtons">
-            <ng-container *ngIf="p !== '...'; else dots">
+          @for (p of pageButtons; track p) {
+            @if (p !== '...') {
               <button
                 class="page-btn"
                 [class.active]="p === currentPage"
                 (click)="goToPage(p)"
-              >
+                >
                 {{ p }}
               </button>
-            </ng-container>
-            <ng-template #dots>
+            } @else {
               <span class="dots">…</span>
-            </ng-template>
-          </ng-container>
-
+            }
+          }
           <button
             class="page-btn arrow"
             (click)="nextPage()"
             [disabled]="currentPage === totalPages"
-          >
+            >
             &gt;
           </button>
         </div>
-      </section>
+      }
     </section>
-  </main>
+  }
+</section>
+</main>
 </ion-content>

@@ -11,7 +11,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 
 export interface DialogData {
   title: string;
@@ -32,57 +32,59 @@ export interface DialogOption {
   selector: 'app-dialog-radio',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
     MatButtonModule,
-    MatRadioModule,
-  ],
+    MatRadioModule
+],
   template: `
     <div class="title">
       <h2 mat-dialog-title style="color: #00061C; font-size: 20px;padding: 0;">
         {{ data.title }}
       </h2>
     </div>
-
+    
     <mat-dialog-content>
       <!-- Mensagem principal (opcional) -->
       <div class="text">
-        <p *ngIf="data.message">{{ data.message }}</p>
+        @if (data.message) {
+          <p>{{ data.message }}</p>
+        }
       </div>
-
+    
       <!-- Opções de rádio -->
       <mat-radio-group [(ngModel)]="selectedOption" class="radio-group">
-        <mat-radio-button
-          *ngFor="let option of data.options"
-          [value]="option.value"
-          [checked]="option.checked"
-          class="radio-button"
-        >
-          {{ option.label }}
-        </mat-radio-button>
+        @for (option of data.options; track option) {
+          <mat-radio-button
+            [value]="option.value"
+            [checked]="option.checked"
+            class="radio-button"
+            >
+            {{ option.label }}
+          </mat-radio-button>
+        }
       </mat-radio-group>
     </mat-dialog-content>
-
+    
     <mat-dialog-actions align="end">
-     <section style="display: flex;gap:8px;justify-content: space-between;width:100%">
-       <div class="cancelar">
-        <button mat-button (click)="onCancel()">
-          {{ data.cancelText || 'Cancelar' }}
-        </button>
-      </div>
-
-      <div class="criar">
-        <button mat-raised-button (click)="onConfirm()">
-          {{ data.confirmText || 'Confirmar' }}
-        </button>
-      </div>
-     </section>
+      <section style="display: flex;gap:8px;justify-content: space-between;width:100%">
+        <div class="cancelar">
+          <button mat-button (click)="onCancel()">
+            {{ data.cancelText || 'Cancelar' }}
+          </button>
+        </div>
+    
+        <div class="criar">
+          <button mat-raised-button (click)="onConfirm()">
+            {{ data.confirmText || 'Confirmar' }}
+          </button>
+        </div>
+      </section>
     </mat-dialog-actions>
-  `,
+    `,
   styles: [
     `
       .title {

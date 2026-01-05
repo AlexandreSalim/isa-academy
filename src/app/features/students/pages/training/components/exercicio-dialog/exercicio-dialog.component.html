@@ -4,28 +4,32 @@
   <!-- Grupo Muscular -->
   <div class="form-row">
     <div style="display: flex; justify-content: space-between;align-items: center;">
-      <label>Grupo</label> 
+      <label>Grupo</label>
       <span style="cursor: pointer; color: #007bff;" (click)="openDialogMuscleGroups()">+ adicionar grupo</span>
     </div>
     <select class="input-select" (change)="onMuscleGroupChange($event)" [value]="selectedMuscleGroupId || ''">
       <option value="">Selecione um grupo</option>
-      <option *ngFor="let muscle of muscleGroups" [value]="muscle.id">
-        {{muscle.name}}
-      </option>
+      @for (muscle of muscleGroups; track muscle) {
+        <option [value]="muscle.id">
+          {{muscle.name}}
+        </option>
+      }
     </select>
   </div>
 
   <!-- Exercício -->
   <div class="form-row">
     <div style="display: flex; justify-content: space-between;align-items: center;">
-      <label>Exercício</label> 
+      <label>Exercício</label>
       <span style="cursor: pointer; color: #007bff;" (click)="openDialogExercises()">+ adicionar exercício</span>
     </div>
     <select class="input-select" [(ngModel)]="selectedExerciseId" name="exercise">
       <option value="">Selecione um exercício</option>
-      <option *ngFor="let exercise of exercises" [value]="exercise.id">
-        {{exercise.name}} ({{exercise.muscle_group_name || 'Sem grupo'}})
-      </option>
+      @for (exercise of exercises; track exercise) {
+        <option [value]="exercise.id">
+          {{exercise.name}} ({{exercise.muscle_group_name || 'Sem grupo'}})
+        </option>
+      }
     </select>
   </div>
 
@@ -44,55 +48,57 @@
     </div>
   </div>
 
-<div class="row-two radio-row">
-  <div class="radio-col">
-    <label class="radio-label">
-      <input
-        type="radio"
-        name="mode"
-        [(ngModel)]="selectedMode"
-        value="repetitions"
-      />
-      <span>Repetição</span>
-    </label>
-    <div class="small-input">
-      <input type="number" class="input" [(ngModel)]="data.repetitions" name="repetitions" />
-      <span class="x">x</span>
-    </div>
-  </div>
+  <div class="row-two radio-row">
+    <div class="radio-col">
+      <label class="radio-label">
+        <input
+          type="radio"
+          name="mode"
+          [(ngModel)]="selectedMode"
+          value="repetitions"
+          />
+          <span>Repetição</span>
+        </label>
+        <div class="small-input">
+          <input type="number" class="input" [(ngModel)]="data.repetitions" name="repetitions" />
+          <span class="x">x</span>
+        </div>
+      </div>
 
-  <div class="radio-col">
-    <label class="radio-label">
-      <input
-        type="radio"
-        name="mode"
-        [(ngModel)]="selectedMode"
-        value="time"
-      />
-      <span>Tempo</span>
-    </label>
-    <div class="small-input">
-      <input type="number" class="input" [(ngModel)]="data.time" name="time" />
-      <span class="unit-badge">s</span>
-    </div>
-  </div>
-</div>
+      <div class="radio-col">
+        <label class="radio-label">
+          <input
+            type="radio"
+            name="mode"
+            [(ngModel)]="selectedMode"
+            value="time"
+            />
+            <span>Tempo</span>
+          </label>
+          <div class="small-input">
+            <input type="number" class="input" [(ngModel)]="data.time" name="time" />
+            <span class="unit-badge">s</span>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-row">
-    <label>Observação</label>
-    <textarea class="input textarea" [(ngModel)]="data.notes" name="notes"></textarea>
-  </div>
+      <div class="form-row">
+        <label>Observação</label>
+        <textarea class="input textarea" [(ngModel)]="data.notes" name="notes"></textarea>
+      </div>
 
-  <!-- Remover a linha de excluir do dialog -->
-  <!-- <div class="add-more" style="color: red;">Excluir exercício</div> -->
-  
-  <div *ngIf="!isEditMode" class="add-more">+ Adicionar exercício</div>
+      <!-- Remover a linha de excluir do dialog -->
+      <!-- <div class="add-more" style="color: red;">Excluir exercício</div> -->
 
-</mat-dialog-content>
+      @if (!isEditMode) {
+        <div class="add-more">+ Adicionar exercício</div>
+      }
 
-<mat-dialog-actions align="end" class="ex-dialog-actions">
-  <button mat-button class="btn-cancel" (click)="onCancel()">Cancelar</button>
-  <button mat-flat-button class="btn-add" (click)="onConfirm()">
-    {{ isEditMode ? 'Salvar' : 'Adicionar' }}
-  </button>
-</mat-dialog-actions>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" class="ex-dialog-actions">
+      <button mat-button class="btn-cancel" (click)="onCancel()">Cancelar</button>
+      <button mat-flat-button class="btn-add" (click)="onConfirm()">
+        {{ isEditMode ? 'Salvar' : 'Adicionar' }}
+      </button>
+    </mat-dialog-actions>

@@ -4,9 +4,9 @@
   #formContent
   [fullscreen]="true"
   style="--background: #d9d9d9 !important"
->
+  >
   <main class="content">
-    
+
     <form #formEl [formGroup]="form" (ngSubmit)="enviarForm()">
       <h1>Dados pessoais</h1>
       <section class="form">
@@ -14,151 +14,164 @@
           <div class="input">
             <div style="display: flex">
               <label for="name">Nome:</label>
-              <small class="error" *ngIf="hasError('name')">*</small>
+              @if (hasError('name')) {
+                <small class="error">*</small>
+              }
             </div>
             <input
               id="name"
               type="text"
               formControlName="name"
               placeholder="Fulano"
-            
-            />
-          </div>
 
-          <div class="input">
-            <label for="surname">Sobrenome:</label>
-            <input
-              id="surname"
-              type="text"
-              formControlName="surname"
-              placeholder="de tal"
-            />
-          </div>
-        </div>
-
-        <div class="input inputMarginTop">
-          <div class="dob-wrapper">
-            <div style="display: flex">
-              <div class="dob-label">Data de nascimento</div>
-              <small class="error" *ngIf="hasError('day')">*</small>
+              />
             </div>
 
-            <div class="dob-row">
-              <div style="position: relative">
-                <ion-icon
-                  name="chevron-down-outline"
-                  style="position: absolute; right: 16px; top: 14px"
-                ></ion-icon>
-                <select
-                  id="day"
-                  class="dob-select"
-                  aria-label="Day"
-                  formControlName="day"
-                  (change)="onDayChange($event)"
-                >
-                  <option *ngFor="let d of days" [value]="d">{{ d }}</option>
-                </select>
-              </div>
-
-              <div style="position: relative">
-                <ion-icon
-                  name="chevron-down-outline"
-                  style="position: absolute; right: 16px; top: 14px"
-                ></ion-icon>
-                <select
-                  id="month"
-                  class="dob-select"
-                  aria-label="Month"
-                  formControlName="month"
-                  (change)="onMonthChange($event)"
-                >
-                  <option
-                    *ngFor="let m of months; let i = index"
-                    [value]="i + 1"
-                  >
-                    {{ m }}
-                  </option>
-                </select>
-              </div>
-
-              <div style="position: relative">
-                <ion-icon
-                  name="chevron-down-outline"
-                  style="position: absolute; right: 16px; top: 14px"
-                ></ion-icon>
-                <select
-                  id="year"
-                  class="dob-select"
-                  aria-label="Year"
-                  formControlName="year"
-                  (change)="onYearChange($event)"
-                >
-                  <option *ngFor="let y of years" [value]="y">{{ y }}</option>
-                </select>
+            <div class="input">
+              <label for="surname">Sobrenome:</label>
+              <input
+                id="surname"
+                type="text"
+                formControlName="surname"
+                placeholder="de tal"
+                />
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="double doubleRadios inputMarginTop">
-          <div style="display: flex">
-            <p
+            <div class="input inputMarginTop">
+              <div class="dob-wrapper">
+                <div style="display: flex">
+                  <div class="dob-label">Data de nascimento</div>
+                  @if (hasError('day')) {
+                    <small class="error">*</small>
+                  }
+                </div>
+
+                <div class="dob-row">
+                  <div style="position: relative">
+                    <ion-icon
+                      name="chevron-down-outline"
+                      style="position: absolute; right: 16px; top: 14px"
+                    ></ion-icon>
+                    <select
+                      id="day"
+                      class="dob-select"
+                      aria-label="Day"
+                      formControlName="day"
+                      (change)="onDayChange($event)"
+                      >
+                      @for (d of days; track d) {
+                        <option [value]="d">{{ d }}</option>
+                      }
+                    </select>
+                  </div>
+
+                  <div style="position: relative">
+                    <ion-icon
+                      name="chevron-down-outline"
+                      style="position: absolute; right: 16px; top: 14px"
+                    ></ion-icon>
+                    <select
+                      id="month"
+                      class="dob-select"
+                      aria-label="Month"
+                      formControlName="month"
+                      (change)="onMonthChange($event)"
+                      >
+                      @for (m of months; track m; let i = $index) {
+                        <option
+                          [value]="i + 1"
+                          >
+                          {{ m }}
+                        </option>
+                      }
+                    </select>
+                  </div>
+
+                  <div style="position: relative">
+                    <ion-icon
+                      name="chevron-down-outline"
+                      style="position: absolute; right: 16px; top: 14px"
+                    ></ion-icon>
+                    <select
+                      id="year"
+                      class="dob-select"
+                      aria-label="Year"
+                      formControlName="year"
+                      (change)="onYearChange($event)"
+                      >
+                      @for (y of years; track y) {
+                        <option [value]="y">{{ y }}</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="double doubleRadios inputMarginTop">
+              <div style="display: flex">
+                <p
               style="
                 margin: 0 0 12px 8px;
                 font-family: 'Montserrat', sans-serif;
               "
-            >
-              Gênero:
-            </p>
-            <small class="error" *ngIf="hasError('gender')">*</small>
-          </div>
-
-          <div class="double">
-            <div class="input">
-              <div class="inputRadio">
-                <p>Masculino</p>
-                <input
-                  type="radio"
-                  formControlName="gender"
-                  name="gender"
-                  value="Masculino"
-                />
+                  >
+                  Gênero:
+                </p>
+                @if (hasError('gender')) {
+                  <small class="error">*</small>
+                }
               </div>
-            </div>
 
-            <div class="input">
-              <div class="inputRadio">
-                <p>Feminino</p>
-                <input
-                  type="radio"
-                  formControlName="gender"
-                  name="gender"
-                  value="Feminino"
-                />
+              <div class="double">
+                <div class="input">
+                  <div class="inputRadio">
+                    <p>Masculino</p>
+                    <input
+                      type="radio"
+                      formControlName="gender"
+                      name="gender"
+                      value="Masculino"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="input">
+                    <div class="inputRadio">
+                      <p>Feminino</p>
+                      <input
+                        type="radio"
+                        formControlName="gender"
+                        name="gender"
+                        value="Feminino"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input inputMarginTop" style="width: 147px">
+                  <div style="display: flex">
+                    <label for="contact">Contato:</label>
+                    @if (hasError('contact')) {
+                      <small class="error">*</small>
+                    }
+                  </div>
+                  <input
+                    id="contact"
+                    type="text"
+                    formControlName="contact"
+                    mask="(00) 00000-0000"
+                    placeholder="(00) 00000-0000"
+                    />
+                  </div>
+                </section>
+              </form>
+              <div class="divButton">
+                <button class="button" type="button" (click)="enviarForm()">
+                  {{isEdit ? 'Editar' : ' Cadastrar'}}
+                </button>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="input inputMarginTop" style="width: 147px">
-          <div style="display: flex">
-            <label for="contact">Contato:</label>
-            <small class="error" *ngIf="hasError('contact')">*</small>
-          </div>
-          <input
-            id="contact"
-            type="text"
-            formControlName="contact"
-            mask="(00) 00000-0000"
-            placeholder="(00) 00000-0000"
-          />
-        </div>
-      </section>
-    </form>
-    <div class="divButton">
-      <button class="button" type="button" (click)="enviarForm()">
-       {{isEdit ? 'Editar' : ' Cadastrar'}}
-      </button>
-    </div>
-  </main>
-</ion-content>
+            </main>
+          </ion-content>

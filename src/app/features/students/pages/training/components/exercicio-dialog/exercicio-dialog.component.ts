@@ -9,7 +9,7 @@ import {
 import { MuscleGroupsService } from '../../services/muscle-groups.service';
 import { StudentsService } from 'src/app/core/services/StudentsService';
 import { DialogDataMuscleGroups } from './muscle-groups-dialog/muscle-groups-dialog.component';
-import { CommonModule } from '@angular/common';
+
 import { AddExerciseService } from '../../services/add-exercise.service';
 import { DialogDataExercise } from './add-exercise-dialog/add-exercise-dialog.component';
 
@@ -31,7 +31,7 @@ export interface DialogData {
   templateUrl: './exercicio-dialog.component.html',
   styleUrls: ['./exercicio-dialog.component.scss'],
   standalone: true,
-  imports: [MatDialogActions, MatDialogContent, FormsModule, CommonModule],
+  imports: [MatDialogActions, MatDialogContent, FormsModule],
 })
 export class ExercicioDialogComponent implements OnInit {
   muscleGroups: DialogDataMuscleGroups[] = [];

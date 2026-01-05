@@ -2,88 +2,96 @@
 <ion-header
   [translucent]="true"
   style="background-color: #d9d9d9; box-shadow: none"
->
-<div class="header" style="padding: 48px 0 0 0;height: 100px;border-radius: 0;background: #020b2a;">
-  <div class="name-icon">
-    <ion-icon name="chevron-back-outline" (click)="back()"></ion-icon>
-    <h2>{{student?.name}} {{ student?.surname }}</h2>
+  >
+  <div class="header" style="padding: 48px 0 0 0;height: 100px;border-radius: 0;background: #020b2a;">
+    <div class="name-icon">
+      <ion-icon name="chevron-back-outline" (click)="back()"></ion-icon>
+      <h2>{{student?.name}} {{ student?.surname }}</h2>
+    </div>
   </div>
-</div>
 </ion-header>
 
 
 <ion-content [fullscreen]="true" style="--background: #d9d9d9; padding: 16px">
-  <div class="header" *ngIf="student">
-  
-    <ion-thumbnail>
-      <img
-        alt="Silhouette of mountains"
-        src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-      />
-    </ion-thumbnail>
-  
-    <div class="gender-age">
-       <p>{{ student.gender === 'Masculino' ? 'Masculino' : 'Feminino' }}
-      </p>
-       <div class="unread-indicator-wrapper" slot="start">
-        <div class="unread-indicator"></div>
+  @if (student) {
+    <div class="header">
+      <ion-thumbnail>
+        <img
+          alt="Silhouette of mountains"
+          src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
+          />
+        </ion-thumbnail>
+        <div class="gender-age">
+          <p>{{ student.gender === 'Masculino' ? 'Masculino' : 'Feminino' }}
+          </p>
+          <div class="unread-indicator-wrapper" slot="start">
+            <div class="unread-indicator"></div>
+          </div>
+          <p>{{student.age}} anos</p>
+        </div>
+        @if (student.start_date) {
+          <p class="aluno-desde">Aluno desde: {{student.start_date}}</p>
+        }
       </div>
-      <p>{{student.age}} anos</p>
-    </div>
-  
-    <p *ngIf="student.start_date" class="aluno-desde">Aluno desde: {{student.start_date}}</p>
-  
-  </div>
+    }
 
-  <ion-refresher slot="fixed" (ionRefresh)="reload()">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+    <ion-refresher slot="fixed" (ionRefresh)="reload()">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
-  <ion-spinner *ngIf="loading"></ion-spinner>
-  <p *ngIf="error">{{ error }}</p>
+    @if (loading) {
+      <ion-spinner></ion-spinner>
+    }
+    @if (error) {
+      <p>{{ error }}</p>
+    }
 
-  <!-- <ng-container *ngIf="student; else notFound"> -->
-  <ng-container *ngIf="!(loading)">
-    <section class="content" *ngIf="student">
-      <div class="data">
-        <p>Dados Pessoais</p>
-        <ion-icon name="pencil-outline" (click)="edit(student.id)"></ion-icon>
-      </div>
-      <div class="card">
-        <div class="card_dates">
-          <h2>Nome: </h2>
-          <p>{{ student.name }}</p>
-        </div>
-        <div class="card_dates">
-          <h2>Data de nascimento: </h2>
-          <p>{{ student.date_of_birth }}</p>
-        </div>
-        <div class="card_dates">
-          <h2>Sexo: </h2>
-          <p>{{ student.gender === 'Masculino' ? 'Masculino' : 'Feminino' }}</p>
-        </div>
-        <div>
-          <h2>Contato: </h2>
-          <p>{{ student.contact}}</p>
-        </div>
-      </div>
-      <div class="card" (click)="avaliacao(student.id)">
-        <div>
-          <ion-icon name="reader-outline"></ion-icon>
-          <h2>Avaliação física</h2>
-          <span *ngIf="student.start_date">Feita em {{ student.end_date }}</span>
-        </div>
-      </div>
-      <div class="card" (click)="training(student.id)">
-        <div>
-          <ion-icon name="barbell-outline"></ion-icon>
-        <h2>Treinos</h2>
-        </div>
-      </div>
-    </section>
-  </ng-container>
+    <!-- <ng-container *ngIf="student; else notFound"> -->
+    @if (!(loading)) {
+      @if (student) {
+        <section class="content">
+          <div class="data">
+            <p>Dados Pessoais</p>
+            <ion-icon name="pencil-outline" (click)="edit(student.id)"></ion-icon>
+          </div>
+          <div class="card">
+            <div class="card_dates">
+              <h2>Nome: </h2>
+              <p>{{ student.name }}</p>
+            </div>
+            <div class="card_dates">
+              <h2>Data de nascimento: </h2>
+              <p>{{ student.date_of_birth }}</p>
+            </div>
+            <div class="card_dates">
+              <h2>Sexo: </h2>
+              <p>{{ student.gender === 'Masculino' ? 'Masculino' : 'Feminino' }}</p>
+            </div>
+            <div>
+              <h2>Contato: </h2>
+              <p>{{ student.contact}}</p>
+            </div>
+          </div>
+          <div class="card" (click)="avaliacao(student.id)">
+            <div>
+              <ion-icon name="reader-outline"></ion-icon>
+              <h2>Avaliação física</h2>
+              @if (student.start_date) {
+                <span>Feita em {{ student.end_date }}</span>
+              }
+            </div>
+          </div>
+          <div class="card" (click)="training(student.id)">
+            <div>
+              <ion-icon name="barbell-outline"></ion-icon>
+              <h2>Treinos</h2>
+            </div>
+          </div>
+        </section>
+      }
+    }
 
-  <ng-template #notFound>
-    <div style="padding: 24px; color: #666">Aluno não encontrado.</div>
-  </ng-template>
-</ion-content>
+    <ng-template #notFound>
+      <div style="padding: 24px; color: #666">Aluno não encontrado.</div>
+    </ng-template>
+  </ion-content>

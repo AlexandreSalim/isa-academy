@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {
   FormControl,
@@ -23,11 +23,10 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
     IonContent,
     IonIcon,
     FormsModule,
-    CommonModule,
     HeaderComponent,
     NgxMaskDirective,
-    ReactiveFormsModule,
-  ],
+    ReactiveFormsModule
+],
   providers: [provideNgxMask()],
 })
 export class StudentsForm implements OnInit {

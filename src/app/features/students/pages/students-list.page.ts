@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
@@ -14,15 +14,14 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./students-list.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     IonIcon,
     IonContent,
     IonTitle,
     IonToolbar,
     IonHeader,
-    HeaderComponent,
-  ]
+    HeaderComponent
+]
 })
 export class StudentsList implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

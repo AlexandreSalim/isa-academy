@@ -2,7 +2,7 @@
   [fullscreen]="true"
   class="page-content"
   style="--background: #d9d9d9"
->
+  >
   <!-- gradient header -->
   <div class="hero-top">
     <div
@@ -13,7 +13,7 @@
         justify-content: start;
         padding: 24px 24px 0 24px;
       "
-    >
+      >
       <ion-icon
         name="chevron-back-outline"
         class="back-btn"
@@ -52,247 +52,260 @@
               d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-            <path
-              class="circle"
-              [attr.stroke-dasharray]="totals.recebidoPercent + ', 100'"
+              />
+              <path
+                class="circle"
+                [attr.stroke-dasharray]="totals.recebidoPercent + ', 100'"
               d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-          </svg>
-          <div class="circle-label">
-            <div class="percent">{{ totals.recebidoPercent }}%</div>
-            <div class="title">RECEBIDO</div>
-          </div>
-        </div>
-
-        <div class="card-body">
-          <h3>ENTRADAS</h3>
-          <div class="lines">
-            <div class="box-span">
-              <div>
-                <span class="span-green">Recebido:</span>
-                <strong class="green"
-                  >{{ formatCurrency(totals.recebidoValor) }}</strong
-                >
-              </div>
-              <div>
-                <span class="span-green">Falta:</span>
-                <strong class="green"
-                  >{{ formatCurrency(totals.faltaReceberValor) }}</strong
-                >
+                />
+              </svg>
+              <div class="circle-label">
+                <div class="percent">{{ totals.recebidoPercent }}%</div>
+                <div class="title">RECEBIDO</div>
               </div>
             </div>
-            <div class="preview">
-              <span>Previsto:</span>
-              <strong
-                >{{ formatCurrency(totals.previstoEntradasValor) }}</strong
-              >
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Card GASTO -->
-      <div class="metric-card">
-        <div class="circle-wrap">
-          <svg viewBox="0 0 36 36" class="circular-chart">
-            <path
-              class="circle-bg"
-              d="M18 2.0845
-          a 15.9155 15.9155 0 0 1 0 31.831
-          a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-            <path
-              class="circle red"
-              [attr.stroke-dasharray]="totals.gastoPercent + ', 100'"
-              d="M18 2.0845
-          a 15.9155 15.9155 0 0 1 0 31.831
-          a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-          </svg>
-          <div class="circle-label">
-            <div class="percent">{{ totals.gastoPercent }}%</div>
-            <div class="title">GASTO</div>
-          </div>
-        </div>
-
-        <div class="card-body">
-          <h3>SAÍDAS</h3>
-          <div class="lines">
-            <div class="box-span">
-              <div>
-                <span class="span-red">Pago:</span>
-                <strong class="red"
-                  >{{ formatCurrency(totals.pagoValor) }}</strong
-                >
-              </div>
-              <div>
-                <span class="span-red">Falta:</span>
-                <strong class="red"
-                  >{{ formatCurrency(totals.faltaPagarValor) }}</strong
-                >
-              </div>
-            </div>
-            <div class="preview">
-              <span>Previsto:</span>
-              <strong>{{ formatCurrency(totals.previstoSaidasValor) }}</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="table-card">
-      <!-- Entradas / Saídas tabs -->
-      <div class="panel">
-        <div class="segment">
-          <button
-            [class.active]="activeTab==='entradas'"
-            (click)="setTab('entradas')"
-          >
-            Entradas
-          </button>
-          <button
-            [class.active]="activeTab==='saidas'"
-            (click)="setTab('saidas')"
-          >
-            Saídas
-          </button>
-        </div>
-
-        <div class="table-header">
-          <div class="col cat">CATEGORIA</div>
-          <div class="col val">VALOR</div>
-          <div class="col paid">PAGO?</div>
-        </div>
-
-        <div class="top-row">
-          <div class="left">
-            <div class="badge">Mensalidades</div>
-            <div style="display: flex; align-items: center; gap: 8px">
-          <!-- Barra de progresso -->
-              <div style="width: 100%;">
-                <div style="width: 100%;background-color: #B2B2B2;height: 4px;">
-                  <div
-                    style="background-color: #197D14;height: 4px;"
-                    [style.width.%]="mensalidadesPagasPercent"
-                  ></div>
+            <div class="card-body">
+              <h3>ENTRADAS</h3>
+              <div class="lines">
+                <div class="box-span">
+                  <div>
+                    <span class="span-green">Recebido:</span>
+                    <strong class="green"
+                      >{{ formatCurrency(totals.recebidoValor) }}</strong
+                      >
+                    </div>
+                    <div>
+                      <span class="span-green">Falta:</span>
+                      <strong class="green"
+                        >{{ formatCurrency(totals.faltaReceberValor) }}</strong
+                        >
+                      </div>
+                    </div>
+                    <div class="preview">
+                      <span>Previsto:</span>
+                      <strong
+                        >{{ formatCurrency(totals.previstoEntradasValor) }}</strong
+                        >
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="sub">{{ mensalidadesPagasPercent }}%</div>
-            </div>
-          </div>
-          <div class="center">{{ formatCurrency(totalMensalidadesPagas) }}</div>
-          <div class="right">
-            {{ formatCurrency(totalMensalidadesPendentes) }}
-          </div>
-        </div>
 
-                <div
-          class="add-row"
-          (click)="openAddEntry()"
-          *ngIf="activeTab==='entradas'"
-        >
-          <ion-icon name="add-circle-outline"></ion-icon>
-          <span>Adicionar Nova Entrada</span>
-        </div>
+                <!-- Card GASTO -->
+                <div class="metric-card">
+                  <div class="circle-wrap">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path
+                        class="circle-bg"
+              d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <path
+                          class="circle red"
+                          [attr.stroke-dasharray]="totals.gastoPercent + ', 100'"
+              d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"
+                          />
+                        </svg>
+                        <div class="circle-label">
+                          <div class="percent">{{ totals.gastoPercent }}%</div>
+                          <div class="title">GASTO</div>
+                        </div>
+                      </div>
 
-        <div
-          class="add-row"
-          (click)="openAddEntry()"
-          *ngIf="activeTab==='saidas'"
-        >
-          <ion-icon name="add-circle-outline"></ion-icon>
-          <span>Adicionar Nova Saida</span>
-        </div>
-        
-        <div class="rows">
-          <ng-container *ngIf="activeTab === 'entradas'">
-            <div *ngFor="let e of entradas" class="row">
-              <div class="left">
-                <mat-expansion-panel
-                  style="box-shadow: none; width: 95px"
-                  (opened)="panelOpenState.set(true)"
-                  (closed)="panelOpenState.set(false)"
-                >
-                  <mat-expansion-panel-header
+                      <div class="card-body">
+                        <h3>SAÍDAS</h3>
+                        <div class="lines">
+                          <div class="box-span">
+                            <div>
+                              <span class="span-red">Pago:</span>
+                              <strong class="red"
+                                >{{ formatCurrency(totals.pagoValor) }}</strong
+                                >
+                              </div>
+                              <div>
+                                <span class="span-red">Falta:</span>
+                                <strong class="red"
+                                  >{{ formatCurrency(totals.faltaPagarValor) }}</strong
+                                  >
+                                </div>
+                              </div>
+                              <div class="preview">
+                                <span>Previsto:</span>
+                                <strong>{{ formatCurrency(totals.previstoSaidasValor) }}</strong>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="table-card">
+                        <!-- Entradas / Saídas tabs -->
+                        <div class="panel">
+                          <div class="segment">
+                            <button
+                              [class.active]="activeTab==='entradas'"
+                              (click)="setTab('entradas')"
+                              >
+                              Entradas
+                            </button>
+                            <button
+                              [class.active]="activeTab==='saidas'"
+                              (click)="setTab('saidas')"
+                              >
+                              Saídas
+                            </button>
+                          </div>
+
+                          <div class="table-header">
+                            <div class="col cat">CATEGORIA</div>
+                            <div class="col val">VALOR</div>
+                            <div class="col paid">PAGO?</div>
+                          </div>
+
+                          <div class="top-row">
+                            <div class="left">
+                              <div class="badge">Mensalidades</div>
+                              <div style="display: flex; align-items: center; gap: 8px">
+                                <!-- Barra de progresso -->
+                                <div style="width: 100%;">
+                                  <div style="width: 100%;background-color: #B2B2B2;height: 4px;">
+                                    <div
+                                      style="background-color: #197D14;height: 4px;"
+                                      [style.width.%]="mensalidadesPagasPercent"
+                                    ></div>
+                                  </div>
+                                </div>
+                                <div class="sub">{{ mensalidadesPagasPercent }}%</div>
+                              </div>
+                            </div>
+                            <div class="center">{{ formatCurrency(totalMensalidadesPagas) }}</div>
+                            <div class="right">
+                              {{ formatCurrency(totalMensalidadesPendentes) }}
+                            </div>
+                          </div>
+
+                          @if (activeTab==='entradas') {
+                            <div
+                              class="add-row"
+                              (click)="openAddEntry()"
+                              >
+                              <ion-icon name="add-circle-outline"></ion-icon>
+                              <span>Adicionar Nova Entrada</span>
+                            </div>
+                          }
+
+                          @if (activeTab==='saidas') {
+                            <div
+                              class="add-row"
+                              (click)="openAddEntry()"
+                              >
+                              <ion-icon name="add-circle-outline"></ion-icon>
+                              <span>Adicionar Nova Saida</span>
+                            </div>
+                          }
+
+                          <div class="rows">
+                            @if (activeTab === 'entradas') {
+                              @for (e of entradas; track e) {
+                                <div class="row">
+                                  <div class="left">
+                                    <mat-expansion-panel
+                                      style="box-shadow: none; width: 95px"
+                                      (opened)="panelOpenState.set(true)"
+                                      (closed)="panelOpenState.set(false)"
+                                      >
+                                      <mat-expansion-panel-header
                     style="
                       padding: 0px 12px 0 2px;
                       height: auto;
                       font-size: 14px;
                       color: #020b2a;
                     "
-                  >
-                    <mat-panel-title style="color: black"
-                      >{{ e.title }}</mat-panel-title
-                    >
-                  </mat-expansion-panel-header>
-                  <div class="sub-row">{{ e.subtitle }}</div>
-                </mat-expansion-panel>
-              </div>
-              <div class="center">{{ formatCurrency(e.value) }}</div>
-              <div class="right">
-                <ion-button
-                  fill="clear"
-                  (click)="togglePaid(e)"
-                  [disabled]="loading"
-                >
-                  <ion-icon
-                    [name]="e.paid ? 'checkmark-circle' : 'ellipse-outline'"
-                    [style.color]="e.status === 'pendente' ? '#ff6b6b' : '#4CAF50'"
-                  ></ion-icon>
-                </ion-button>
-              </div>
-              <!-- Adicione isso em algum lugar visível -->
-              <div *ngIf="successMessage" class="success-message"
-              [style.backgroundColor]="successMessage == 'Status alterado para: Pendente' ? '#ff6b6b' : '#4CAF50'">
-                {{ successMessage }}
-              </div>
-            </div>
+                                        >
+                                        <mat-panel-title style="color: black"
+                                          >{{ e.title }}</mat-panel-title
+                                          >
+                                        </mat-expansion-panel-header>
+                                        <div class="sub-row">{{ e.subtitle }}</div>
+                                      </mat-expansion-panel>
+                                    </div>
+                                    <div class="center">{{ formatCurrency(e.value) }}</div>
+                                    <div class="right">
+                                      <ion-button
+                                        fill="clear"
+                                        (click)="togglePaid(e)"
+                                        [disabled]="loading"
+                                        >
+                                        <ion-icon
+                                          [name]="e.paid ? 'checkmark-circle' : 'ellipse-outline'"
+                                          [style.color]="e.status === 'pendente' ? '#ff6b6b' : '#4CAF50'"
+                                        ></ion-icon>
+                                      </ion-button>
+                                    </div>
+                                    <!-- Adicione isso em algum lugar visível -->
+                                    @if (successMessage) {
+                                      <div class="success-message"
+                                        [style.backgroundColor]="successMessage == 'Status alterado para: Pendente' ? '#ff6b6b' : '#4CAF50'">
+                                        {{ successMessage }}
+                                      </div>
+                                    }
+                                  </div>
+                                }
+                                @if (loading) {
+                                  <div class="loading-message">
+                                    Atualizando status...
+                                  </div>
+                                }
+                              }
 
-            <div *ngIf="loading" class="loading-message">
-              Atualizando status...
-            </div>
-          </ng-container>
+                              @if (activeTab === 'saidas') {
+                                @for (s of saidas; track s) {
+                                  <div class="row">
+                                    <div class="left">
+                                      <div class="title-row">{{ s.title }}</div>
+                                    </div>
+                                    <div class="center">{{ formatCurrency(s.value) }}</div>
+                                    <div class="right">
+                                      <ion-button
+                                        fill="clear"
+                                        (click)="togglePaid(s)"
+                                        [disabled]="loading"
+                                        >
+                                        <ion-icon
+                                          [name]="s.paid ? 'checkmark-circle' : 'ellipse-outline'"
+                                          [style.color]="s.status === 'pendente' ? '#ff6b6b' : '#4CAF50'"
+                                        ></ion-icon>
+                                      </ion-button>
+                                    </div>
+                                    <!-- Mensagem de loading -->
+                                    @if (loading) {
+                                      <div class="loading-message">
+                                        Atualizando status...
+                                      </div>
+                                    }
+                                    <!-- Adicione isso em algum lugar visível -->
+                                    @if (successMessage) {
+                                      <div class="success-message"
+                                        [style.backgroundColor]="successMessage == 'Status alterado para: Pendente' ? '#ff6b6b' : '#4CAF50'">
+                                        {{ successMessage }}
+                                      </div>
+                                    }
+                                  </div>
+                                }
+                              }
+                            </div>
+                          </div>
+                        </div>
 
-          <ng-container *ngIf="activeTab === 'saidas'">
-            <div *ngFor="let s of saidas" class="row">
-              <div class="left">
-                <div class="title-row">{{ s.title }}</div>
-              </div>
-              <div class="center">{{ formatCurrency(s.value) }}</div>
-              <div class="right">
-                <ion-button
-                  fill="clear"
-                  (click)="togglePaid(s)"
-                  [disabled]="loading"
-                >
-                  <ion-icon
-                    [name]="s.paid ? 'checkmark-circle' : 'ellipse-outline'"
-                    [style.color]="s.status === 'pendente' ? '#ff6b6b' : '#4CAF50'"
-                  ></ion-icon>
-                </ion-button>
-              </div>
-              <!-- Mensagem de loading -->
-              <div *ngIf="loading" class="loading-message">
-                Atualizando status...
-              </div>
-              <!-- Adicione isso em algum lugar visível -->
-              <div *ngIf="successMessage" class="success-message"
-               [style.backgroundColor]="successMessage == 'Status alterado para: Pendente' ? '#ff6b6b' : '#4CAF50'">
-                {{ successMessage }}
-              </div>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
-
-    <button class="accordion" (click)="mensalidades()">
-      <ion-icon name="logo-usd"></ion-icon>
-      <p>Mensalidades</p>
-    </button>
-  </main>
-</ion-content>
+                        <button class="accordion" (click)="mensalidades()">
+                          <ion-icon name="logo-usd"></ion-icon>
+                          <p>Mensalidades</p>
+                        </button>
+                      </main>
+                    </ion-content>

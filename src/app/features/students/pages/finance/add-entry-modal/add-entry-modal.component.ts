@@ -1,6 +1,6 @@
 import { Component, OnDestroy, Input, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DateFormatPipe } from 'src/app/shared/pipes/date-format.pipe';
 import { Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ type EntryMode = 'entradas' | 'saidas';
 @Component({
   selector: 'app-add-entry-modal',
   standalone: true,
-  imports: [IonicModule, CommonModule, ReactiveFormsModule, DateFormatPipe],
+  imports: [IonicModule, ReactiveFormsModule, DateFormatPipe],
   templateUrl: './add-entry-modal.component.html',
   styleUrls: ['./add-entry-modal.component.scss'],
 })
